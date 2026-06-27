@@ -1,0 +1,12 @@
+{
+  "name": "mundial2026-ia",
+  "version": "1.0.0",
+  "description": "Servidor proxy para Mundial 2026 IA - Hora Bolivia",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {},
+  "engines": { "node": ">=16" }
+}
