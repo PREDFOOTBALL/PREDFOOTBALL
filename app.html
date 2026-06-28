@@ -619,14 +619,18 @@ async function loadLiga(leagueId) {
   const liga = LIGAS[leagueId] || {name:'Liga', flag:'⚽', season:2025};
 
   // Header de liga
+  const isWorld = leagueId === 1;
   document.getElementById('ligaHeader').innerHTML = `
     <div class="liga-header">
       <div class="liga-logo">${liga.flag}</div>
       <div class="liga-info">
         <div class="liga-name">${liga.name}</div>
-        <div class="liga-sub">Temporada ${liga.season} · Hora Bolivia UTC-4</div>
+        <div class="liga-sub">${isWorld ? '⚡ Auto-actualización cada 60s' : '🔄 Toca 🔄 para actualizar'} · 🇧🇴 Bolivia</div>
       </div>
-      <div class="liga-badge">${liga.type==='world'?'🌍 MUNDIAL':'🏟️ LIGA'}</div>
+      ${isWorld
+        ? '<div class="liga-badge">🌍 MUNDIAL</div>'
+        : '<button onclick="manualRefresh(' + leagueId + ')" id="btnRefresh" style="background:linear-gradient(135deg,var(--g),var(--gold));border:none;color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer">🔄 Actualizar</button>'
+      }
     </div>`;
 
   try {
@@ -698,9 +702,19 @@ function renderFixtures(fixtures, liga) {
   scheduleRefresh();
 }
 
+async function manualRefresh(id) {
+  const btn = document.getElementById('btnRefresh');
+  if(btn){btn.textContent='⏳ Cargando...';btn.disabled=true;}
+  await loadLiga(id);
+  if(btn){btn.textContent='🔄 Actualizar';btn.disabled=false;}
+}
+
 function scheduleRefresh() {
   if(refreshTimer) clearInterval(refreshTimer);
-  refreshTimer=setInterval(()=>loadLiga(curLiga), liveCount>0?30000:300000);
+  // Solo auto-refresh para el Mundial
+if(curLiga===1){
+  refreshTimer=setInterval(()=>loadLiga(1), liveCount>0?60000:1800000); // 60s vivo, 30min sin vivo
+}
 }
 
 // ── BUILD CARD ──
