@@ -81,6 +81,17 @@ const server = http.createServer(async (req, res) => {
       res.setHeader('Content-Type', 'application/json');
       res.writeHead(200); res.end(JSON.stringify(d));
 
+    } else if (pathname === '/api/league') {
+      // Partidos de hoy de cualquier liga
+      const now  = new Date();
+      const bol  = new Date(now.getTime() - 4 * 3600000);
+      const date = bol.toISOString().split('T')[0];
+      const league  = query.league  || '39';
+      const season  = query.season  || '2025';
+      const d = await apiFetch('/fixtures?league='+league+'&season='+season+'&date='+date);
+      res.setHeader('Content-Type', 'application/json');
+      res.writeHead(200); res.end(JSON.stringify(d));
+
     } else {
       res.writeHead(404); res.end('Not found');
     }
