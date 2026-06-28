@@ -59,12 +59,29 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(200); res.end(JSON.stringify(d));
 
     } else if (pathname === '/api/today') {
-      const now  = new Date();
-      const bol  = new Date(now.getTime() - 4 * 3600000);
-      const date = bol.toISOString().split('T')[0];
-      const d    = await apiFetch('/fixtures?league=1&season=2026&date=' + date);
+      // Bolivia = UTC-4. Buscamos en vivo + fecha Bolivia + fecha UTC para no perder partidos
+      const now     = new Date();
+      const bol     = new Date(now.getTime() - 4 * 3600000);
+      const today   = bol.toISOString().split('T')[0];
+      const utcDate = now.toISOString().split('T')[0];
+      const [liveData, todayBol, todayUtc] = await Promise.allSettled([
+        apiFetch('/fixtures?league=1&season=2026&live=all'),
+        apiFetch('/fixtures?league=1&season=2026&date=' + today),
+        apiFetch('/fixtures?league=1&season=2026&date=' + utcDate),
+      ]);
+      const seen = new Set();
+      const all  = [];
+      for (const r of [liveData, todayBol, todayUtc]) {
+        if (r.status === 'fulfilled') {
+          for (const f of (r.value.response || [])) {
+            if (!seen.has(f.fixture.id)) { seen.add(f.fixture.id); all.push(f); }
+          }
+        }
+      }
+      all.sort((a,b) => new Date(a.fixture.date) - new Date(b.fixture.date));
       res.setHeader('Content-Type', 'application/json');
-      res.writeHead(200); res.end(JSON.stringify(d));
+      res.writeHead(200);
+      res.end(JSON.stringify({ response: all, results: all.length }));
 
     } else if (pathname === '/api/lineups') {
       const d = await apiFetch('/fixtures/lineups?fixture=' + (query.fixture || ''));
@@ -91,6 +108,37 @@ const server = http.createServer(async (req, res) => {
       const d = await apiFetch('/fixtures?league='+league+'&season='+season+'&date='+date);
       res.setHeader('Content-Type', 'application/json');
       res.writeHead(200); res.end(JSON.stringify(d));
+
+    } else if (pathname === '/api/debug') {
+      // Debug: muestra que devuelve la API para el Mundial hoy
+      const now     = new Date();
+      const bol     = new Date(now.getTime() - 4 * 3600000);
+      const today   = bol.toISOString().split('T')[0];
+      const utcDate = now.toISOString().split('T')[0];
+      const tomorrow = new Date(now.getTime() + 86400000).toISOString().split('T')[0];
+      try {
+        const [d1,d2,d3,d4] = await Promise.allSettled([
+          apiFetch('/fixtures?league=1&season=2026&live=all'),
+          apiFetch('/fixtures?league=1&season=2026&date='+today),
+          apiFetch('/fixtures?league=1&season=2026&date='+utcDate),
+          apiFetch('/fixtures?league=1&season=2026&date='+tomorrow),
+        ]);
+        res.setHeader('Content-Type', 'application/json');
+        res.writeHead(200);
+        res.end(JSON.stringify({
+          serverTime: now.toISOString(),
+          boliviaTime: bol.toISOString(),
+          dates: {bolDate:today, utcDate, tomorrow},
+          live:     {count:(d1.value?.results||0), status:d1.status},
+          bolDate:  {count:(d2.value?.results||0), status:d2.status},
+          utcDate:  {count:(d3.value?.results||0), status:d3.status},
+          nextDay:  {count:(d4.value?.results||0), status:d4.status, fixtures:(d4.value?.response||[]).slice(0,3).map(f=>({
+            date:f.fixture?.date, home:f.teams?.home?.name, away:f.teams?.away?.name, status:f.fixture?.status?.short
+          }))},
+        }, null, 2));
+      } catch(e) {
+        res.writeHead(500); res.end(JSON.stringify({error:e.message}));
+      }
 
     } else {
       res.writeHead(404); res.end('Not found');
