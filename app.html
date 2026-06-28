@@ -640,12 +640,18 @@ async function loadLiga(leagueId) {
       : `/api/league?league=${leagueId}&season=${season}`;
 
     const data = await apiFetch(endpoint);
-    const fixtures = data.response || [];
+    let fixtures = data.response || [];
 
     // Filtrar solo del league actual si no es Mundial
     const filtered = leagueId===1
       ? fixtures
       : fixtures.filter(f=>f.league?.id===leagueId);
+
+    // Si el Mundial no tiene partidos hoy, mostrar fixture del día de respaldo
+    if(leagueId===1 && filtered.length===0){
+      const fallback = getWCFallback();
+      if(fallback.length>0){ renderFixtures(fallback, liga); return; }
+    }
 
     renderFixtures(filtered, liga);
   } catch(e) {
@@ -1021,6 +1027,61 @@ setTimeout(()=>{
   document.getElementById('splash').classList.add('hide');
   setTimeout(()=>document.getElementById('splash').style.display='none',600);
 },2200);
+
+// FALLBACK: Partidos del Mundial si la API no los tiene aún
+function getWCFallback() {
+  const now = new Date();
+  const bol = new Date(now.getTime() - 4*3600000);
+  const todayBol = bol.toISOString().split('T')[0];
+
+  // Todos los partidos de los 16avos en UTC
+  const WC_FIXTURES = [
+    // 28 Jun
+    {date:'2026-06-28T23:00:00Z', home:'South Africa', away:'Canada', venue:'Los Angeles'},
+    // 29 Jun
+    {date:'2026-06-29T21:00:00Z', home:'Brazil', away:'Japan', venue:'Houston'},
+    {date:'2026-06-30T00:30:00Z', home:'Germany', away:'Paraguay', venue:'Boston'},
+    // 30 Jun
+    {date:'2026-06-30T06:00:00Z', home:'Netherlands', away:'Morocco', venue:'Monterrey'},
+    {date:'2026-06-30T22:00:00Z', home:'Ivory Coast', away:'Norway', venue:'Dallas'},
+    {date:'2026-07-01T02:00:00Z', home:'France', away:'Sweden', venue:'New Jersey'},
+    // 1 Jul
+    {date:'2026-07-01T07:00:00Z', home:'Mexico', away:'Ecuador', venue:'Mexico City'},
+    {date:'2026-07-01T22:00:00Z', home:'England', away:'DR Congo', venue:'Atlanta'},
+    {date:'2026-07-02T02:00:00Z', home:'Belgium', away:'Senegal', venue:'Seattle'},
+    // 2 Jul
+    {date:'2026-07-02T06:00:00Z', home:'USA', away:'Bosnia', venue:'Santa Clara'},
+    {date:'2026-07-02T23:00:00Z', home:'Spain', away:'Austria', venue:'Dallas'},
+    {date:'2026-07-03T03:00:00Z', home:'Portugal', away:'Algeria', venue:'New York'},
+    // 3 Jul
+    {date:'2026-07-03T22:00:00Z', home:'Argentina', away:'Cape Verde', venue:'Houston'},
+    {date:'2026-07-04T02:00:00Z', home:'Croatia', away:'Colombia', venue:'Kansas City'},
+  ];
+
+  // Filtrar partidos de hoy (hora Bolivia) y mañana
+  const tomorrowBol = new Date(bol.getTime()+86400000).toISOString().split('T')[0];
+
+  return WC_FIXTURES
+    .filter(f => {
+      const bolDate = new Date(new Date(f.date).getTime()-4*3600000).toISOString().split('T')[0];
+      return bolDate === todayBol || bolDate === tomorrowBol;
+    })
+    .map((f,i) => ({
+      fixture: {
+        id: 9000+i,
+        date: f.date,
+        status: { short: new Date(f.date) < now ? 'FT' : 'NS', elapsed: null },
+        venue: { city: f.venue }
+      },
+      league: { id:1, name:'Copa Mundial FIFA 2026', round:'Round of 32' },
+      teams: {
+        home: { id: 9000+i, name: f.home, winner: null },
+        away: { id: 9001+i, name: f.away, winner: null }
+      },
+      goals: { home: null, away: null },
+      score: {}
+    }));
+}
 
 // INIT
 renderGrupos(); renderRanking();
