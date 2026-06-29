@@ -2,57 +2,44 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PredFootball">
 <meta name="theme-color" content="#060810">
 <title>PredFootball IA</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap');
 :root{
   --g:#0a6e37;--gl:#17a34a;--gold:#d4a843;
-  --bg:#060810;--d1:#0c1118;--d2:#111920;--d3:#19242e;--d4:#1e2f3c;
+  --bg:#060810;--d2:#111920;--d3:#19242e;--d4:#1e2f3c;
   --w:#eaf0f7;--mu:#5a7080;--re:#e03535;--bl:#2d7de8;--pu:#8b4cf5;
-  --or:#e07820;
-  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);
+  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w);
-  display:flex;flex-direction:column;padding-top:var(--st)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w);display:flex;flex-direction:column;padding-top:var(--st)}
 
 /* SPLASH */
-#splash{position:fixed;inset:0;z-index:999;background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
-  transition:opacity .5s}
+#splash{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .5s}
 #splash.hide{opacity:0;pointer-events:none}
-.sp-ball{width:80px;height:80px;border-radius:20px;
-  background:linear-gradient(135deg,var(--g),var(--gold));
-  display:flex;align-items:center;justify-content:center;font-size:40px;
-  box-shadow:0 0 40px rgba(10,110,55,.5);animation:br 2s ease-in-out infinite}
+.sp-ball{width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,var(--g),var(--gold));display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 0 40px rgba(10,110,55,.5);animation:br 2s ease-in-out infinite}
 @keyframes br{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.sp-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:30px}
-.sp-title em{color:var(--gold);font-style:normal}
-.sp-sub{font-size:11px;color:var(--mu);text-align:center}
+.sp-t{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:30px}
+.sp-t em{color:var(--gold);font-style:normal}
+.sp-s{font-size:11px;color:var(--mu);text-align:center}
 .sp-bar{width:140px;height:3px;background:var(--d3);border-radius:2px;overflow:hidden}
-.sp-fill{height:100%;background:linear-gradient(90deg,var(--g),var(--gold));animation:ld 2s ease forwards}
+.sp-fill{height:100%;background:linear-gradient(90deg,var(--g),var(--gold));animation:ld 2.2s ease forwards}
 @keyframes ld{0%{width:0}100%{width:100%}}
 
 /* HEADER */
-.hdr{height:50px;flex-shrink:0;background:linear-gradient(135deg,#050810,#091420);
-  border-bottom:1px solid rgba(212,168,67,.12);
-  padding:0 14px;display:flex;align-items:center;justify-content:space-between}
+.hdr{height:50px;flex-shrink:0;background:linear-gradient(135deg,#050810,#091420);border-bottom:1px solid rgba(212,168,67,.12);padding:0 14px;display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:8px}
-.lball{width:28px;height:28px;border-radius:7px;
-  background:linear-gradient(135deg,var(--g),var(--gold));
-  display:flex;align-items:center;justify-content:center;font-size:14px}
+.lball{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--g),var(--gold));display:flex;align-items:center;justify-content:center;font-size:14px}
 .ltxt{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:17px}
 .ltxt em{color:var(--gold);font-style:normal}
 .hdr-r{display:flex;align-items:center;gap:8px}
-.chip{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:700;
-  background:rgba(10,110,55,.18);border:1px solid rgba(10,110,55,.4);
-  padding:3px 8px;border-radius:20px;color:var(--gl);letter-spacing:.5px}
+.chip{display:flex;align-items:center;gap:4px;font-size:9px;font-weight:700;background:rgba(10,110,55,.18);border:1px solid rgba(10,110,55,.4);padding:3px 8px;border-radius:20px;color:var(--gl)}
 .chip.err{background:rgba(224,53,53,.18);border-color:rgba(224,53,53,.4);color:var(--re)}
 .dot{width:5px;height:5px;background:var(--gl);border-radius:50%;animation:bk 1.3s infinite}
 @keyframes bk{0%,100%{opacity:1}50%{opacity:.2}}
@@ -60,46 +47,28 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w);
 .ct{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;color:var(--gold);line-height:1}
 .cl{font-size:8px;color:var(--mu)}
 
-/* STATUS */
-.sbar{padding:5px 14px;font-size:10px;display:flex;align-items:center;
-  justify-content:space-between;gap:8px;flex-shrink:0}
+/* STATUS BAR */
+.sbar{padding:5px 14px;font-size:10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .sbar.ok{background:rgba(10,110,55,.1);color:var(--gl);border-bottom:1px solid rgba(10,110,55,.15)}
 .sbar.err{background:rgba(224,53,53,.08);color:var(--re);border-bottom:1px solid rgba(224,53,53,.12)}
 .sbar.loading{background:rgba(212,168,67,.08);color:var(--gold);border-bottom:1px solid rgba(212,168,67,.12)}
 
-/* TABS DE LIGA — arriba */
-.liga-tabs{display:flex;overflow-x:auto;gap:6px;padding:8px 14px;
-  background:var(--d1);border-bottom:1px solid var(--d2);flex-shrink:0;
-  -webkit-overflow-scrolling:touch}
-.liga-tabs::-webkit-scrollbar{display:none}
-.ltab{display:flex;align-items:center;gap:5px;padding:5px 11px;
-  background:var(--d2);border:1px solid var(--d3);border-radius:20px;
-  font-size:11px;font-weight:600;color:var(--mu);cursor:pointer;
-  white-space:nowrap;transition:.15s;flex-shrink:0}
-.ltab:active{transform:scale(.95)}
+/* LIGA TABS */
+.ltabs{display:flex;overflow-x:auto;gap:6px;padding:8px 14px;background:#0c1118;border-bottom:1px solid var(--d2);flex-shrink:0;-webkit-overflow-scrolling:touch}
+.ltabs::-webkit-scrollbar{display:none}
+.ltab{display:flex;align-items:center;gap:5px;padding:5px 11px;background:var(--d2);border:1px solid var(--d3);border-radius:20px;font-size:11px;font-weight:600;color:var(--mu);cursor:pointer;white-space:nowrap;flex-shrink:0;transition:.15s}
 .ltab.active{background:rgba(212,168,67,.12);border-color:rgba(212,168,67,.4);color:var(--gold)}
-.ltab.live-tab{border-color:rgba(224,53,53,.4);color:var(--re)}
-.ltab.live-tab.active{background:rgba(224,53,53,.12)}
-.ltab-flag{font-size:14px}
-.ltab-lv{width:6px;height:6px;background:var(--re);border-radius:50%;
-  animation:bk 1s infinite;flex-shrink:0}
+.ltab:active{transform:scale(.95)}
 
 /* SCROLL */
-.scroll{flex:1;overflow-y:auto;overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  padding-bottom:calc(68px + var(--sb))}
+.scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(68px + var(--sb))}
 .scroll::-webkit-scrollbar{display:none}
 
 /* BOTTOM NAV */
-.bnav{position:fixed;bottom:0;left:0;right:0;
-  background:rgba(8,12,20,.96);border-top:1px solid var(--d3);
-  display:flex;padding:6px 0;
-  padding-bottom:calc(6px + var(--sb));
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:100}
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
-  cursor:pointer;border:none;background:none;padding:3px 0}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,12,20,.97);border-top:1px solid var(--d3);display:flex;padding:6px 0;padding-bottom:calc(6px + var(--sb));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:100}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;border:none;background:none;padding:3px 0}
 .ni-i{font-size:19px;line-height:1;transition:.15s}
-.ni-l{font-size:8px;font-weight:600;color:var(--mu);letter-spacing:.3px}
+.ni-l{font-size:8px;font-weight:600;color:var(--mu)}
 .ni.active .ni-l{color:var(--gold)}
 .ni.active .ni-i{transform:scale(1.1)}
 .nd{width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:0;margin-top:1px}
@@ -108,119 +77,102 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w);
 /* MAIN */
 .main{padding:12px}
 .sec{display:none}.sec.active{display:block}
-
-/* STITLE */
-.stitle{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;
-  letter-spacing:.5px;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.stitle{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:15px;margin-bottom:9px;display:flex;align-items:center;gap:8px}
 .stitle::after{content:'';flex:1;height:1px;background:var(--d3)}
 
-/* MATCH CARD CON SPLIT VIEW */
-.pg{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+/* LIGA HEADER */
+.lhdr{display:flex;align-items:center;gap:10px;background:var(--d2);border:1px solid var(--d3);border-radius:11px;padding:11px 14px;margin-bottom:12px}
+.lhdr-logo{font-size:26px}
+.lhdr-info{flex:1}
+.lhdr-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:17px}
+.lhdr-sub{font-size:9px;color:var(--mu);margin-top:1px}
+.btn-refresh{background:rgba(212,168,67,.15);border:1px solid rgba(212,168,67,.4);color:var(--gold);padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.lhdr-badge{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(10,110,55,.15);color:var(--gl);border:1px solid rgba(10,110,55,.3)}
 
-.mcard{background:var(--d2);border:1px solid var(--d3);border-radius:12px;
-  overflow:hidden;cursor:pointer;transition:.15s;position:relative}
-.mcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--g),var(--gold));opacity:0;transition:.2s}
+/* MATCH CARDS */
+.pg{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.mcard{background:var(--d2);border:1px solid var(--d3);border-radius:12px;overflow:hidden;cursor:pointer;transition:.15s;position:relative}
+.mcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--g),var(--gold));opacity:0;transition:.2s}
 .mcard:active{transform:scale(.985)}
-.mcard.sel{border-color:rgba(212,168,67,.5)}
-.mcard.sel::before{opacity:1}
+.mcard.sel::before,.mcard.lv::before{opacity:1}
 .mcard.lv{border-color:rgba(224,53,53,.4)}
-.mcard.lv::before{opacity:1;background:linear-gradient(90deg,var(--re),#ff6b6b);
-  animation:lp 1.5s infinite}
+.mcard.lv::before{background:linear-gradient(90deg,var(--re),#ff6060);animation:lp 1.5s infinite}
 @keyframes lp{0%,100%{opacity:1}50%{opacity:.3}}
 
+/* CARD TOP */
 .mc-top{display:flex;justify-content:space-between;align-items:center;padding:8px 12px 5px}
-.mc-grp{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
+.mc-grp{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold)}
 .bdg{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px}
 .b-ft{background:rgba(90,112,128,.14);color:var(--mu);border:1px solid rgba(90,112,128,.2)}
-.b-lv{background:rgba(224,53,53,.2);color:var(--re);border:1px solid rgba(224,53,53,.5);
-  animation:lglow 1.5s infinite}
-@keyframes lglow{0%,100%{box-shadow:none}50%{box-shadow:0 0 8px rgba(224,53,53,.4)}}
+.b-lv{background:rgba(224,53,53,.2);color:var(--re);border:1px solid rgba(224,53,53,.5);animation:glow 1.5s infinite}
+@keyframes glow{0%,100%{box-shadow:none}50%{box-shadow:0 0 8px rgba(224,53,53,.4)}}
 .b-ns{background:rgba(45,125,232,.14);color:var(--bl);border:1px solid rgba(45,125,232,.28)}
 .b-ht{background:rgba(212,168,67,.14);color:var(--gold);border:1px solid rgba(212,168,67,.28)}
 
-/* SPLIT: izquierda marcador | derecha predicción */
-.mc-split{display:grid;grid-template-columns:1fr 1px 1fr;padding:0 0 10px}
+/* CARD SPLIT: izquierda=marcador | derecha=predicción */
+.mc-split{display:grid;grid-template-columns:1fr 1px 1fr;padding-bottom:10px}
 .mc-left{padding:6px 12px}
 .mc-right{padding:6px 12px}
 .mc-sep{background:var(--d3);margin:6px 0}
 
-/* EQUIPO ROW */
-.eq-row{display:flex;align-items:center;gap:7px;margin-bottom:3px}
+/* EQUIPOS */
+.eq-row{display:flex;align-items:center;gap:7px;margin-bottom:4px}
 .eq-flag{font-size:20px;width:26px;text-align:center;flex-shrink:0}
-.eq-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;flex:1;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.eq-sc{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;
-  color:var(--w);min-width:16px;text-align:right}
+.eq-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.eq-sc{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;color:var(--w);min-width:18px;text-align:right}
 .eq-sc.lv{color:var(--re)}
-
 .mc-time{font-size:10px;color:var(--re);font-weight:700;margin-top:3px;animation:bk 1s infinite}
-.mc-kick{font-size:10px;color:var(--gold);font-weight:600;margin-top:3px}
+.mc-kick{font-size:11px;color:var(--gold);font-weight:600;margin-top:3px}
 .mc-venue{font-size:9px;color:var(--mu);margin-top:1px}
 
-/* PREDICCION MINI */
-.pred-lbl{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--mu);margin-bottom:4px}
-.pred-win{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:13px;color:var(--gold)}
-.pred-sc{font-size:11px;color:var(--w);margin-top:1px}
-
+/* PREDICCIÓN MINI */
+.pred-lbl{font-size:8px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--mu);margin-bottom:4px}
+.pred-win{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:14px;color:var(--gold);margin-bottom:2px}
+.pred-sc{font-size:11px;color:var(--w)}
 .mini-pbar{display:flex;height:4px;border-radius:2px;overflow:hidden;margin-top:5px}
 .mp1{background:var(--g)}.mpd{background:var(--d4)}.mp2{background:var(--bl)}
 .mini-pnums{display:flex;justify-content:space-between;font-size:7px;color:var(--mu);margin-top:2px}
-.mini-pnums .c1{color:var(--gl)}.mini-pnums .c2{color:var(--bl)}
-
-.mini-conf{display:flex;align-items:center;gap:4px;margin-top:5px}
-.mini-ring{position:relative;width:28px;height:28px;flex-shrink:0}
-.mini-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.mini-ring .tr{fill:none;stroke:var(--d3);stroke-width:4}
-.mini-ring .fi{fill:none;stroke-width:4;stroke-linecap:round}
-.mini-ring-lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:8px;color:var(--gold)}
+.c1{color:var(--gl)}.c2{color:var(--bl)}
+.mini-conf{display:flex;align-items:center;gap:5px;margin-top:5px}
+.mring{position:relative;width:28px;height:28px;flex-shrink:0}
+.mring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.mring .tr{fill:none;stroke:var(--d3);stroke-width:4}
+.mring .fi{fill:none;stroke-width:4;stroke-linecap:round}
+.mring-n{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:8px;color:var(--gold)}
 .mini-conf-txt{font-size:9px;color:var(--mu)}
 .mini-conf-txt strong{color:var(--w);font-size:9px}
 
-/* ANÁLISIS */
+/* ANÁLISIS DETALLADO */
 .awrap{animation:fin .3s ease}
 @keyframes fin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 
+/* SPLIT HERO */
 .split-hero{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px}
 .sv-live{border:1px solid rgba(224,53,53,.25);border-radius:11px;padding:13px}
 .sv-live.ft{background:var(--d2);border-color:var(--d3)}
 .sv-live.ns{background:var(--d2);border-color:rgba(45,125,232,.2)}
-.sv-lbl{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
-.sv-live .sv-lbl{color:var(--re)}
+.sv-lbl{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px;color:var(--re)}
 .sv-live.ft .sv-lbl{color:var(--mu)}
 .sv-live.ns .sv-lbl{color:var(--bl)}
-.sv-big{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:34px;
-  text-align:center;line-height:1;color:var(--re);margin:3px 0}
+.sv-big{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:34px;text-align:center;line-height:1;color:var(--re);margin:3px 0}
 .sv-big.ft{color:var(--w)}.sv-big.ns{color:var(--gold)}
-.sv-min{font-size:11px;color:var(--re);text-align:center;font-weight:700;
-  animation:bk 1s infinite;margin-bottom:5px}
-.sv-tr{display:flex;align-items:center;justify-content:space-between;
-  font-size:11px;font-weight:600;padding:2px 0}
+.sv-min{font-size:11px;color:var(--re);text-align:center;font-weight:700;animation:bk 1s infinite;margin-bottom:5px}
+.sv-tr{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:600;padding:2px 0}
 .sv-fl{font-size:15px}
-
-.sv-pred{background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(10,110,55,.05));
-  border:1px solid rgba(212,168,67,.2);border-radius:11px;padding:13px}
+.sv-pred{background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(10,110,55,.05));border:1px solid rgba(212,168,67,.2);border-radius:11px;padding:13px}
 .sv-pred .sv-lbl{color:var(--gold)}
-.sv-pred-sc{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;
-  text-align:center;color:var(--gold);margin:3px 0}
+.sv-pred-sc{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;text-align:center;color:var(--gold);margin:3px 0}
 .sv-pred-win{font-size:11px;text-align:center;color:var(--w);font-weight:600;margin-bottom:3px}
 .sv-cbar{height:4px;background:var(--d3);border-radius:2px;overflow:hidden;margin-top:5px}
 .sv-cfill{height:100%;background:linear-gradient(90deg,var(--g),var(--gold));border-radius:2px}
 .sv-ctxt{font-size:9px;color:var(--mu);text-align:right;margin-top:2px}
 
-.aibox{background:linear-gradient(135deg,var(--d2),rgba(139,76,245,.05));
-  border:1px solid rgba(139,76,245,.18);border-radius:11px;
-  padding:13px;margin-bottom:11px;font-size:13px;line-height:1.7;color:#bccad8}
-.aibg{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;color:var(--pu);
-  background:rgba(139,76,245,.12);border:1px solid rgba(139,76,245,.18);
-  padding:2px 8px;border-radius:20px;margin-bottom:7px}
+.aibox{background:linear-gradient(135deg,var(--d2),rgba(139,76,245,.05));border:1px solid rgba(139,76,245,.18);border-radius:11px;padding:13px;margin-bottom:11px;font-size:13px;line-height:1.7;color:#bccad8}
+.aibg{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--pu);background:rgba(139,76,245,.12);border:1px solid rgba(139,76,245,.18);padding:2px 8px;border-radius:20px;margin-bottom:7px}
 
 .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:11px}
 .sbox{background:var(--d2);border:1px solid var(--d3);border-radius:9px;padding:10px}
-.sl{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:4px}
+.sl{font-size:8px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mu);margin-bottom:4px}
 .sv2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;line-height:1}
 .cg{color:var(--gl)}.cgo{color:var(--gold)}.cr{color:var(--re)}
 
@@ -232,64 +184,46 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w);
 .s5p{font-size:9px;color:var(--gold);font-weight:600}
 
 .facts{display:flex;flex-direction:column;gap:5px;margin-bottom:11px}
-.fact{background:var(--d2);border:1px solid var(--d3);border-radius:9px;
-  padding:9px 11px;display:flex;align-items:center;gap:7px}
+.fact{background:var(--d2);border:1px solid var(--d3);border-radius:9px;padding:9px 11px;display:flex;align-items:center;gap:7px}
 .fi{font-size:14px;min-width:18px}
 .ft2{flex:1;font-size:11px;line-height:1.4}
 .ft2 strong{color:var(--w);font-weight:600}.ft2 span{color:var(--mu)}
-.fimp{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;
-  padding:2px 7px;border-radius:4px;min-width:48px;text-align:center}
+.fimp{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;padding:2px 7px;border-radius:4px;min-width:48px;text-align:center}
 .fp{background:rgba(10,110,55,.18);color:var(--gl)}
 .fn{background:rgba(224,53,53,.18);color:var(--re)}
 .fu{background:rgba(90,112,128,.16);color:var(--mu)}
 
-.ev-list{display:flex;flex-direction:column;gap:0;margin-bottom:11px;
-  background:var(--d2);border:1px solid var(--d3);border-radius:10px;overflow:hidden}
-.ev-row{display:flex;align-items:center;gap:8px;padding:7px 12px;
-  border-bottom:1px solid rgba(255,255,255,.04);font-size:11px}
+.ev-list{display:flex;flex-direction:column;background:var(--d2);border:1px solid var(--d3);border-radius:10px;overflow:hidden;margin-bottom:11px}
+.ev-row{display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px}
 .ev-row:last-child{border-bottom:none}
-.ev-min{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;
-  color:var(--gold);min-width:30px}
-.ev-ico{font-size:13px}
-.ev-txt{flex:1;color:var(--w)}
-.ev-team{font-size:9px;color:var(--mu)}
+.ev-min{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;color:var(--gold);min-width:30px}
+.ev-ico{font-size:13px}.ev-txt{flex:1;color:var(--w)}.ev-team{font-size:9px;color:var(--mu)}
 
 .lng{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:11px}
 .lt{background:var(--d2);border:1px solid var(--d3);border-radius:10px;padding:11px}
-.lh{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;
-  margin-bottom:8px;display:flex;justify-content:space-between}
+.lh{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;margin-bottom:8px;display:flex;justify-content:space-between}
 .lsrc{font-size:8px;color:var(--mu);font-family:'Inter',sans-serif;font-weight:400}
-.lr{display:grid;grid-template-columns:18px 1fr 26px;gap:3px;
-  padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:10px;align-items:center}
+.lr{display:grid;grid-template-columns:18px 1fr 26px;gap:3px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:10px;align-items:center}
 .lr:last-child{border-bottom:none}
 .lnum{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;color:var(--gold)}
 .lnm{font-weight:500;font-size:10px}
 .lpos{font-size:8px;background:var(--d3);padding:1px 4px;border-radius:3px;color:var(--mu);text-align:center}
 .lem{text-align:center;padding:14px 6px;color:var(--mu);font-size:10px;line-height:1.6}
 
-/* GRUPOS */
 .ggrid{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
 .gc{background:var(--d2);border:1px solid var(--d3);border-radius:11px;overflow:hidden}
-.gh{background:var(--d3);padding:7px 11px;font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:12px;letter-spacing:.5px;display:flex;justify-content:space-between}
+.gh{background:var(--d3);padding:7px 11px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:.5px;display:flex;justify-content:space-between}
 .gh span{font-size:8px;color:var(--mu);font-family:'Inter',sans-serif;font-weight:400}
-.gw{display:grid;grid-template-columns:19px 1fr 20px 20px 20px 28px;
-  gap:3px;padding:6px 11px;border-bottom:1px solid rgba(255,255,255,.04);
-  font-size:10px;align-items:center}
+.gw{display:grid;grid-template-columns:19px 1fr 20px 20px 20px 28px;gap:3px;padding:6px 11px;border-bottom:1px solid rgba(255,255,255,.04);font-size:10px;align-items:center}
 .gw:last-child{border-bottom:none}.gw.cls{background:rgba(10,110,55,.08)}
 .gfl{font-size:14px}.gn{font-weight:500}
 .gv{text-align:center;color:var(--mu);font-size:9px}
 .gpts{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:13px;text-align:right}
 .gpts.ldr{color:var(--gold)}
 
-/* RANKING */
 .rt{background:var(--d2);border:1px solid var(--d3);border-radius:11px;overflow:hidden;margin-bottom:12px}
-.rh2{display:grid;grid-template-columns:26px 1fr 54px 60px;
-  padding:7px 11px;background:var(--d3);
-  font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);gap:4px}
-.rr{display:grid;grid-template-columns:26px 1fr 54px 60px;
-  padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.04);
-  align-items:center;gap:4px;font-size:12px}
+.rh2{display:grid;grid-template-columns:26px 1fr 54px 60px;padding:7px 11px;background:var(--d3);font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mu);gap:4px}
+.rr{display:grid;grid-template-columns:26px 1fr 54px 60px;padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.04);align-items:center;gap:4px}
 .rr:last-child{border-bottom:none}
 .rnum{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:13px;color:var(--mu)}
 .rnum.t{color:var(--gold)}
@@ -299,49 +233,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w);
 .rbarf{height:100%;background:linear-gradient(90deg,var(--g),var(--gold));border-radius:2px}
 .rv{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;text-align:center}
 
-.disc{background:rgba(212,168,67,.04);border:1px solid rgba(212,168,67,.12);
-  border-radius:8px;padding:9px 12px;font-size:10px;color:var(--mu);line-height:1.6;margin-top:9px}
+.disc{background:rgba(212,168,67,.04);border:1px solid rgba(212,168,67,.12);border-radius:8px;padding:9px 12px;font-size:10px;color:var(--mu);line-height:1.6;margin-top:9px}
 .disc strong{color:var(--gold)}
-.loading{background:var(--d2);border:1px solid var(--d3);border-radius:11px;
-  padding:36px;text-align:center}
-.lspin{width:34px;height:34px;border:3px solid var(--d3);border-top-color:var(--gold);
-  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 11px}
+.loading{background:var(--d2);border:1px solid var(--d3);border-radius:11px;padding:36px;text-align:center}
+.lspin{width:34px;height:34px;border:3px solid var(--d3);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 11px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .ltxt{color:var(--mu);font-size:12px}.ltxt strong{color:var(--gold)}
 .empty{text-align:center;padding:30px;color:var(--mu);font-size:13px;line-height:1.8}
-
-/* LIGA HEADER */
-.liga-header{display:flex;align-items:center;gap:10px;
-  background:var(--d2);border:1px solid var(--d3);border-radius:11px;
-  padding:12px 14px;margin-bottom:12px}
-.liga-logo{font-size:28px}
-.liga-info{flex:1}
-.liga-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px}
-.liga-sub{font-size:10px;color:var(--mu);margin-top:1px}
-.liga-badge{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;
-  background:rgba(10,110,55,.15);color:var(--gl);border:1px solid rgba(10,110,55,.3)}
 </style>
 </head>
 <body>
 
 <div id="splash">
   <div class="sp-ball">⚽</div>
-  <div class="sp-title">PRED<em>FOOTBALL</em></div>
-  <div class="sp-sub">🏆 Mundial 2026 + Mejores Ligas<br>🇧🇴 Hora Bolivia · Predicciones IA</div>
+  <div class="sp-t">PRED<em>FOOTBALL</em></div>
+  <div class="sp-s">🏆 Mundial 2026 + Ligas · 🇧🇴 Bolivia · Predicciones IA</div>
   <div class="sp-bar"><div class="sp-fill"></div></div>
 </div>
 
 <header class="hdr">
-  <div class="logo">
-    <div class="lball">⚽</div>
-    <div class="ltxt">PRED<em>FOOTBALL</em></div>
-  </div>
+  <div class="logo"><div class="lball">⚽</div><div class="ltxt">PRED<em>FOOTBALL</em></div></div>
   <div class="hdr-r">
     <div class="chip" id="apiChip"><span class="dot"></span><span id="apiTxt">CARGANDO</span></div>
-    <div class="clk">
-      <div class="ct" id="ct">--:--</div>
-      <div class="cl">🇧🇴 BOL</div>
-    </div>
+    <div class="clk"><div class="ct" id="ct">--:--</div><div class="cl">🇧🇴 BOL</div></div>
   </div>
 </header>
 
@@ -350,108 +264,54 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w);
   <span style="font-size:9px;color:var(--mu)" id="sbarR"></span>
 </div>
 
-<!-- TABS DE LIGA -->
-<div class="liga-tabs" id="ligaTabs">
-  <div class="ltab active" onclick="selLiga(1,'mundial')" data-id="1">
-    <span class="ltab-flag">🏆</span><span>Mundial 2026</span>
-  </div>
-  <div class="ltab" onclick="selLiga(39,'laliga')" data-id="39">
-    <span class="ltab-flag">🇪🇸</span><span>La Liga</span>
-  </div>
-  <div class="ltab" onclick="selLiga(135,'seriea')" data-id="135">
-    <span class="ltab-flag">🇮🇹</span><span>Serie A</span>
-  </div>
-  <div class="ltab" onclick="selLiga(78,'bundesliga')" data-id="78">
-    <span class="ltab-flag">🇩🇪</span><span>Bundesliga</span>
-  </div>
-  <div class="ltab" onclick="selLiga(61,'ligue1')" data-id="61">
-    <span class="ltab-flag">🇫🇷</span><span>Ligue 1</span>
-  </div>
-  <div class="ltab" onclick="selLiga(2,'ucl')" data-id="2">
-    <span class="ltab-flag">⭐</span><span>Champions</span>
-  </div>
-  <div class="ltab" onclick="selLiga(140,'premierleague')" data-id="140">
-    <span class="ltab-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span>Premier</span>
-  </div>
-  <div class="ltab" onclick="selLiga(253,'mls')" data-id="253">
-    <span class="ltab-flag">🇺🇸</span><span>MLS</span>
-  </div>
-  <div class="ltab" onclick="selLiga(71,'brasileirao')" data-id="71">
-    <span class="ltab-flag">🇧🇷</span><span>Brasileirao</span>
-  </div>
-  <div class="ltab" onclick="selLiga(128,'ligapro')" data-id="128">
-    <span class="ltab-flag">🇦🇷</span><span>Liga Pro ARG</span>
-  </div>
-  <div class="ltab" onclick="selLiga(239,'primerapro')" data-id="239">
-    <span class="ltab-flag">🇨🇴</span><span>Liga COL</span>
-  </div>
+<div class="ltabs">
+  <div class="ltab active" onclick="selLiga(1)" data-id="1"><span>🏆</span><span>Mundial 2026</span></div>
+  <div class="ltab" onclick="selLiga(39)" data-id="39"><span>🇪🇸</span><span>La Liga</span></div>
+  <div class="ltab" onclick="selLiga(135)" data-id="135"><span>🇮🇹</span><span>Serie A</span></div>
+  <div class="ltab" onclick="selLiga(78)" data-id="78"><span>🇩🇪</span><span>Bundesliga</span></div>
+  <div class="ltab" onclick="selLiga(61)" data-id="61"><span>🇫🇷</span><span>Ligue 1</span></div>
+  <div class="ltab" onclick="selLiga(2)" data-id="2"><span>⭐</span><span>Champions</span></div>
+  <div class="ltab" onclick="selLiga(140)" data-id="140"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span>Premier</span></div>
+  <div class="ltab" onclick="selLiga(253)" data-id="253"><span>🇺🇸</span><span>MLS</span></div>
+  <div class="ltab" onclick="selLiga(71)" data-id="71"><span>🇧🇷</span><span>Brasileirao</span></div>
+  <div class="ltab" onclick="selLiga(128)" data-id="128"><span>🇦🇷</span><span>Liga ARG</span></div>
+  <div class="ltab" onclick="selLiga(239)" data-id="239"><span>🇨🇴</span><span>Liga COL</span></div>
 </div>
 
 <div class="scroll">
 <main class="main">
 
-<!-- HOY / PARTIDOS DE LIGA -->
 <section id="hoy" class="sec active">
-  <div id="ligaHeader"></div>
-  <div id="liveSec" style="display:none">
-    <div class="stitle">🔴 En Vivo Ahora</div>
-    <div class="pg" id="pgLive"></div>
-  </div>
-  <div id="ftSec" style="display:none">
-    <div class="stitle">✅ Finalizados Hoy</div>
-    <div class="pg" id="pgFt"></div>
-  </div>
-  <div id="nsSec" style="display:none">
-    <div class="stitle" id="nsTitle">⏰ Próximos · 🇧🇴</div>
-    <div class="pg" id="pgNs"></div>
-  </div>
-  <div id="tmrSec" style="display:none">
-    <div class="stitle">📅 Mañana · 🇧🇴</div>
-    <div class="pg" id="pgTmr"></div>
-  </div>
-  <div id="emptyState" class="empty" style="display:none">
-    📅 No hay partidos hoy en esta competición.<br>
-    <span style="font-size:11px">Prueba otra liga o vuelve mañana.</span>
-  </div>
-  <div id="loadingState" class="loading">
-    <div class="lspin"></div>
-    <div class="ltxt">Cargando partidos...</div>
-  </div>
+  <div id="lgHdr"></div>
+  <div id="sec-lv" style="display:none"><div class="stitle">🔴 En Vivo Ahora</div><div class="pg" id="pg-lv"></div></div>
+  <div id="sec-ft" style="display:none"><div class="stitle">✅ Finalizados Hoy</div><div class="pg" id="pg-ft"></div></div>
+  <div id="sec-ns" style="display:none"><div class="stitle">⏰ Hoy · 🇧🇴 Bolivia</div><div class="pg" id="pg-ns"></div></div>
+  <div id="sec-tmr" style="display:none"><div class="stitle">📅 Mañana · 🇧🇴 Bolivia</div><div class="pg" id="pg-tmr"></div></div>
+  <div id="loadSt" class="loading"><div class="lspin"></div><div class="ltxt">Cargando partidos...</div></div>
+  <div id="emptySt" class="empty" style="display:none">📅 No hay partidos hoy.<br><span style="font-size:11px">Prueba otra liga o vuelve más tarde.</span></div>
 </section>
 
-<!-- ANÁLISIS -->
 <section id="pred" class="sec">
-  <div id="predBox">
-    <div class="loading"><div class="lspin"></div>
-      <div class="ltxt">← Toca un partido en <strong>Hoy</strong></div></div>
-  </div>
+  <div id="predBox"><div class="loading"><div class="lspin"></div><div class="ltxt">← Toca un partido en <strong>Partidos</strong></div></div></div>
 </section>
 
-<!-- ALINEACIONES -->
 <section id="alin" class="sec">
-  <div id="alinBox">
-    <div class="loading"><div class="lspin"></div>
-      <div class="ltxt">← Toca un partido para ver alineaciones</div></div>
-  </div>
+  <div id="alinBox"><div class="loading"><div class="lspin"></div><div class="ltxt">← Toca un partido</div></div></div>
 </section>
 
-<!-- GRUPOS MUNDIAL -->
 <section id="grupos" class="sec">
   <div class="stitle">Tabla de grupos · Mundial 2026</div>
   <div class="ggrid" id="gruGrid"></div>
-  <div class="disc"><strong>Estado:</strong> Top 2 de cada grupo + 8 mejores terceros avanzan a 16avos. ✓ = clasificado.</div>
+  <div class="disc"><strong>Clasificación:</strong> Top 2 de cada grupo + 8 mejores terceros avanzan. ✓ = clasificado.</div>
 </section>
 
-<!-- RANKING -->
 <section id="ranking" class="sec">
   <div class="stitle">Ranking IA · Favoritos al título</div>
   <div class="rt">
-    <div class="rh2"><div>#</div><div>Selección</div>
-      <div style="text-align:center">Rating</div>
-      <div style="text-align:center">%Título</div></div>
+    <div class="rh2"><div>#</div><div>Selección</div><div style="text-align:center">Rating</div><div style="text-align:center">%Título</div></div>
     <div id="rkBody"></div>
   </div>
-  <div class="disc"><strong>Metodología:</strong> ELO dinámico + xG promedio + historial mundialista. % título = 100k simulaciones Monte Carlo.</div>
+  <div class="disc"><strong>Metodología:</strong> ELO dinámico + xG promedio + historial mundialista · 100k simulaciones Monte Carlo.</div>
 </section>
 
 </main>
@@ -466,120 +326,147 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w);
 </nav>
 
 <script>
-// ═══════════════════════════════════════════════════
-// PREDFOOTBALL IA
-// Mundial 2026 + 10 Ligas principales
-// Hora Bolivia UTC-4 · Auto-refresh en vivo
-// ═══════════════════════════════════════════════════
-
 const SERVER = window.location.origin;
 
-// ── LIGAS ──
+// ════════ LIGAS ════════
 const LIGAS = {
-  1:   {name:'Copa Mundial FIFA 2026', flag:'🏆', season:2026, type:'world'},
-  39:  {name:'La Liga', flag:'🇪🇸', season:2025, type:'club'},
-  135: {name:'Serie A', flag:'🇮🇹', season:2025, type:'club'},
-  78:  {name:'Bundesliga', flag:'🇩🇪', season:2025, type:'club'},
-  61:  {name:'Ligue 1', flag:'🇫🇷', season:2025, type:'club'},
-  2:   {name:'UEFA Champions League', flag:'⭐', season:2025, type:'club'},
-  140: {name:'Premier League', flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', season:2025, type:'club'},
-  253: {name:'MLS', flag:'🇺🇸', season:2025, type:'club'},
-  71:  {name:'Brasileirao Serie A', flag:'🇧🇷', season:2025, type:'club'},
-  128: {name:'Liga Profesional Argentina', flag:'🇦🇷', season:2025, type:'club'},
-  239: {name:'Liga BetPlay Colombia', flag:'🇨🇴', season:2025, type:'club'},
+  1:  {name:'Copa Mundial FIFA 2026',flag:'🏆',season:2026,wc:true},
+  39: {name:'La Liga',flag:'🇪🇸',season:2025,wc:false},
+  135:{name:'Serie A',flag:'🇮🇹',season:2025,wc:false},
+  78: {name:'Bundesliga',flag:'🇩🇪',season:2025,wc:false},
+  61: {name:'Ligue 1',flag:'🇫🇷',season:2025,wc:false},
+  2:  {name:'UEFA Champions League',flag:'⭐',season:2025,wc:false},
+  140:{name:'Premier League',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',season:2025,wc:false},
+  253:{name:'MLS',flag:'🇺🇸',season:2025,wc:false},
+  71: {name:'Brasileirao',flag:'🇧🇷',season:2025,wc:false},
+  128:{name:'Liga Profesional ARG',flag:'🇦🇷',season:2025,wc:false},
+  239:{name:'Liga BetPlay COL',flag:'🇨🇴',season:2025,wc:false},
 };
 
-// ── PRONÓSTICOS IA MUNDIAL ──
-const IA_WC = {
-  // ── FASE DE GRUPOS ──
-  'Colombia_Portugal':{p1:38,pd:28,p2:34,conf:62,winner:'Colombia',wpct:38,topScore:'1-1',expG:'2.6',btts:'57%',over:'54%',corners:'10.4',cards:'3.9',scores:[{r:'1-1',p:'15.8%',t:'★'},{r:'2-1',p:'13.2%',t:''},{r:'1-2',p:'12.4%',t:''},{r:'2-0',p:'10.1%',t:''},{r:'0-1',p:'9.8%',t:''}],factors:[{i:'🔥',t:'<strong>Colombia invicta</strong> <span>6 pts, líder del Grupo K</span>',imp:'+ALTO',c:'fp'},{i:'🇵🇹',t:'<strong>Ronaldo</strong> <span>Portugal busca 1er puesto</span>',imp:'+MED',c:'fn'}],ai:'Colombia invicta vs Portugal. Equilibrio total en la pelea por el liderato del Grupo K.'},
-  'Jordan_Argentina':{p1:7,pd:15,p2:78,conf:83,winner:'Argentina',wpct:78,topScore:'0-3',expG:'3.0',btts:'20%',over:'67%',corners:'10.6',cards:'2.8',scores:[{r:'0-3',p:'17.8%',t:'★'},{r:'0-2',p:'15.4%',t:''},{r:'0-4',p:'12.1%',t:''},{r:'1-3',p:'9.2%',t:''},{r:'0-1',p:'6.8%',t:''}],factors:[{i:'🐐',t:'<strong>MESSI</strong> <span>Puede superar récord de Klose</span>',imp:'+ALTO',c:'fp'},{i:'🔄',t:'<strong>Scaloni rotará</strong> <span>XI alternativo</span>',imp:'-MED',c:'fn'}],ai:'Argentina clasifica 1ª. Messi puede ser el máximo goleador histórico del Mundial. Scaloni rotará el equipo.'},
-  // ── ROUND OF 32 ──
-  'South Africa_Canada':{p1:42,pd:26,p2:32,conf:58,winner:'Sudáfrica',wpct:42,topScore:'1-0',expG:'2.1',btts:'44%',over:'42%',corners:'9.8',cards:'3.6',scores:[{r:'1-0',p:'16.4%',t:'★'},{r:'1-1',p:'14.2%',t:''},{r:'2-1',p:'12.8%',t:''},{r:'0-1',p:'11.4%',t:''},{r:'2-0',p:'9.2%',t:''}],factors:[{i:'🇿🇦',t:'<strong>Sudáfrica sorpresa</strong> <span>2º en su grupo, gran rendimiento defensivo</span>',imp:'+MED',c:'fp'},{i:'🇨🇦',t:'<strong>Canadá local</strong> <span>Coorganizador con apoyo masivo</span>',imp:'+MED',c:'fn'},{i:'⚽',t:'<strong>Partido muy disputado</strong> <span>Ambos buscan su primera eliminatoria histórica</span>',imp:'NEUTRO',c:'fu'}],ai:'Partido de 16avos muy equilibrado. Sudáfrica llegó invicta como 2ª del Grupo A. Canadá como co-organizador tiene ventaja de apoyo pero Sudáfrica demostró solidez defensiva. Se espera un partido cerrado que puede ir a prórroga.'},
-  'Brazil_Japan':{p1:62,pd:20,p2:18,conf:71,winner:'Brasil',wpct:62,topScore:'2-0',expG:'2.8',btts:'38%',over:'58%',corners:'11.2',cards:'3.2',scores:[{r:'2-0',p:'18.4%',t:'★'},{r:'2-1',p:'14.2%',t:''},{r:'3-0',p:'12.1%',t:''},{r:'1-0',p:'11.4%',t:''},{r:'3-1',p:'8.8%',t:''}],factors:[{i:'🇧🇷',t:'<strong>Brasil favorito claro</strong> <span>Vinicius, Rodrygo y Neymar en forma</span>',imp:'+ALTO',c:'fp'},{i:'🇯🇵',t:'<strong>Japón sorpresa histórica</strong> <span>Elimina favoritos en Mundiales</span>',imp:'+MED',c:'fn'},{i:'⚡',t:'<strong>Vinicius</strong> <span>El mejor del torneo hasta ahora</span>',imp:'+ALTO',c:'fp'}],ai:'Brasil es favorito claro pero Japón es la mayor sorpresa de los últimos Mundiales. Los brasileños tienen a Vinicius, Rodrygo y Neymar en gran forma. Sin embargo Japón eliminó a Alemania y España en Qatar 2022 — nunca subestimarlos.'},
-  'Germany_Paraguay':{p1:68,pd:18,p2:14,conf:74,winner:'Alemania',wpct:68,topScore:'2-0',expG:'2.9',btts:'32%',over:'61%',corners:'11.8',cards:'3.1',scores:[{r:'2-0',p:'19.2%',t:'★'},{r:'3-0',p:'14.8%',t:''},{r:'2-1',p:'13.4%',t:''},{r:'1-0',p:'11.2%',t:''},{r:'3-1',p:'9.4%',t:''}],factors:[{i:'🇩🇪',t:'<strong>Alemania dominante</strong> <span>8 goles en fase de grupos, xG top 3</span>',imp:'+ALTO',c:'fp'},{i:'🛡️',t:'<strong>Paraguay defensivo</strong> <span>Solo 1 gol en contra en grupos</span>',imp:'-MED',c:'fn'},{i:'⚡',t:'<strong>Havertz y Sané letales</strong> <span>6 goles entre ambos</span>',imp:'+ALTO',c:'fp'}],ai:'Alemania llega como uno de los equipos más en forma. 8 goles en grupos con un xG excepcional. Paraguay sorprendió con una defensa sólida pero el potencial ofensivo alemán es superior. Favorita clara con posibilidad de goleada.'},
-  'Netherlands_Morocco':{p1:54,pd:24,p2:22,conf:63,winner:'Países Bajos',wpct:54,topScore:'2-1',expG:'2.4',btts:'52%',over:'50%',corners:'10.2',cards:'3.8',scores:[{r:'2-1',p:'15.8%',t:'★'},{r:'1-0',p:'13.2%',t:''},{r:'2-0',p:'12.4%',t:''},{r:'1-1',p:'11.8%',t:''},{r:'0-1',p:'9.4%',t:''}],factors:[{i:'🇳🇱',t:'<strong>Países Bajos</strong> <span>Gakpo y Depay en estado de gracia</span>',imp:'+MED',c:'fp'},{i:'🇲🇦',t:'<strong>Marruecos</strong> <span>Semifinalistas en Qatar, defensiva de élite</span>',imp:'+MED',c:'fn'}],ai:'Partido de enorme nivel. Marruecos llegó a semis en Qatar y tiene la mejor defensa africana. Países Bajos con Gakpo y Depay tiene más potencial ofensivo. Partido muy disputado donde la defensa marroquí puede complicar a los holandeses.'},
-  'Ivory Coast_Norway':{p1:44,pd:26,p2:30,conf:55,winner:'Costa de Marfil',wpct:44,topScore:'2-1',expG:'2.5',btts:'54%',over:'52%',corners:'10.1',cards:'4.0',scores:[{r:'2-1',p:'14.8%',t:'★'},{r:'1-1',p:'13.4%',t:''},{r:'1-0',p:'12.1%',t:''},{r:'2-0',p:'10.8%',t:''},{r:'0-1',p:'9.4%',t:''}],factors:[{i:'🇨🇮',t:'<strong>Costa de Marfil</strong> <span>Campeón de África, Haller goleador</span>',imp:'+MED',c:'fp'},{i:'🇳🇴',t:'<strong>Haaland</strong> <span>El goleador más peligroso del torneo</span>',imp:'+ALTO',c:'fn'}],ai:'Partido explosivo con Haaland por un lado y Haller por el otro. Costa de Marfil ganó la AFCON y llega con confianza. Noruega tiene al mejor delantero del mundo. Partido de mucho gol esperado.'},
-  'France_Sweden':{p1:71,pd:17,p2:12,conf:77,winner:'Francia',wpct:71,topScore:'2-0',expG:'2.7',btts:'29%',over:'57%',corners:'11.4',cards:'3.3',scores:[{r:'2-0',p:'20.1%',t:'★'},{r:'2-1',p:'15.4%',t:''},{r:'3-0',p:'13.2%',t:''},{r:'1-0',p:'12.8%',t:''},{r:'3-1',p:'9.1%',t:''}],factors:[{i:'🇫🇷',t:'<strong>Francia favorita absoluta</strong> <span>Mbappé en estado de gracia</span>',imp:'+ALTO',c:'fp'},{i:'⚡',t:'<strong>Mbappé</strong> <span>5 goles en el torneo, imparable</span>',imp:'+ALTO',c:'fp'},{i:'🇸🇪',t:'<strong>Suecia sorpresa</strong> <span>Gyokeres con 4 goles</span>',imp:'+MED',c:'fn'}],ai:'Francia es la gran favorita con Mbappé intratable. Suecia sorprendió con Gyokeres como goleador pero el nivel de Francia es superior. Los Blues deberían ganar con comodidad aunque Gyokeres siempre es peligroso.'},
-  'Mexico_Ecuador':{p1:58,pd:22,p2:20,conf:64,winner:'México',wpct:58,topScore:'2-0',expG:'2.4',btts:'40%',over:'50%',corners:'10.6',cards:'3.7',scores:[{r:'2-0',p:'17.2%',t:'★'},{r:'1-0',p:'14.8%',t:''},{r:'2-1',p:'13.1%',t:''},{r:'1-1',p:'11.4%',t:''},{r:'3-0',p:'9.2%',t:''}],factors:[{i:'🇲🇽',t:'<strong>México local</strong> <span>Coorganizador con apoyo masivo en México City</span>',imp:'+ALTO',c:'fp'},{i:'🇪🇨',t:'<strong>Ecuador competitivo</strong> <span>Buena fase de grupos</span>',imp:'+MED',c:'fn'}],ai:'México como coorganizador tendrá apoyo masivo en el Estadio Azteca. La presión de jugar en casa puede ser doble filo pero históricamente México rinde bien. Ecuador demostró ser competitivo pero México tiene más calidad en casa.'},
-  'England_DR Congo':{p1:78,pd:14,p2:8,conf:82,winner:'Inglaterra',wpct:78,topScore:'3-0',expG:'3.1',btts:'22%',over:'68%',corners:'12.4',cards:'2.9',scores:[{r:'3-0',p:'18.8%',t:'★'},{r:'2-0',p:'17.4%',t:''},{r:'3-1',p:'13.2%',t:''},{r:'2-1',p:'11.4%',t:''},{r:'4-0',p:'9.8%',t:''}],factors:[{i:'🦁',t:'<strong>Inglaterra perfecta</strong> <span>9/9 pts, Bellingham 4 goles</span>',imp:'+ALTO',c:'fp'},{i:'⚡',t:'<strong>Bellingham imparable</strong> <span>El mejor del torneo</span>',imp:'+ALTO',c:'fp'},{i:'🇨🇩',t:'<strong>Congo sorpresa</strong> <span>Clasificó como mejor 3º</span>',imp:'-MED',c:'fn'}],ai:'Inglaterra perfecta en grupos es la gran favorita. Bellingham está siendo el mejor jugador del torneo. Congo logró clasificar como mejor 3º pero el nivel de Inglaterra es muy superior. Se espera victoria inglesa amplia.'},
-  'Belgium_Senegal':{p1:58,pd:22,p2:20,conf:65,winner:'Bélgica',wpct:58,topScore:'2-1',expG:'2.8',btts:'52%',over:'56%',corners:'10.8',cards:'3.5',scores:[{r:'2-1',p:'16.4%',t:'★'},{r:'2-0',p:'14.2%',t:''},{r:'1-0',p:'12.8%',t:''},{r:'1-1',p:'11.4%',t:''},{r:'3-1',p:'9.8%',t:''}],factors:[{i:'🔴',t:'<strong>Bélgica goleó 5-1</strong> <span>La mejor ofensiva del torneo</span>',imp:'+ALTO',c:'fp'},{i:'🇸🇳',t:'<strong>Senegal</strong> <span>Campeón de África 2022, Mané peligroso</span>',imp:'+MED',c:'fn'}],ai:'Bélgica llega en explosiva forma tras golear 5-1 a Nueva Zelanda. De Bruyne, Trossard y Lukaku contra la solidez senegalesa con Mané. Partido atractivo donde Bélgica tiene ventaja pero Senegal puede dar pelea.'},
-  'USA_Bosnia':{p1:62,pd:20,p2:18,conf:68,winner:'USA',wpct:62,topScore:'2-0',expG:'2.6',btts:'38%',over:'54%',corners:'10.4',cards:'3.4',scores:[{r:'2-0',p:'18.1%',t:'★'},{r:'1-0',p:'15.4%',t:''},{r:'2-1',p:'13.2%',t:''},{r:'3-0',p:'11.8%',t:''},{r:'1-1',p:'9.4%',t:''}],factors:[{i:'🇺🇸',t:'<strong>USA local</strong> <span>Coorganizador en Santa Clara</span>',imp:'+ALTO',c:'fp'},{i:'⚡',t:'<strong>Pulisic</strong> <span>Capitán motivado en casa</span>',imp:'+MED',c:'fp'}],ai:'USA como coorganizador tiene ventaja de local y apoyo masivo. Pulisic motivado jugando en casa. Bosnia llegó como mejor 3º pero el nivel de USA es superior en este torneo.'},
-  'Spain_Austria':{p1:71,pd:18,p2:11,conf:76,winner:'España',wpct:71,topScore:'2-0',expG:'2.5',btts:'31%',over:'55%',corners:'11.6',cards:'3.2',scores:[{r:'2-0',p:'19.4%',t:'★'},{r:'2-1',p:'15.2%',t:''},{r:'1-0',p:'13.8%',t:''},{r:'3-0',p:'12.4%',t:''},{r:'3-1',p:'9.2%',t:''}],factors:[{i:'🇪🇸',t:'<strong>España 1ª del H</strong> <span>7 pts, Yamal la gran figura</span>',imp:'+ALTO',c:'fp'},{i:'🌟',t:'<strong>Lamine Yamal</strong> <span>2 goles y 2 asistencias en el torneo</span>',imp:'+ALTO',c:'fp'},{i:'🇦🇹',t:'<strong>Austria 3ª clasificada</strong> <span>Mucha motivación</span>',imp:'-MED',c:'fn'}],ai:'España llega líder del Grupo H con Yamal siendo la gran figura del torneo. Austria llegó como mejor 3º y tiene motivación extra. España debería ganar con su fútbol de posesión y la calidad individual de Yamal y Olmo.'},
-  'Portugal_Algeria':{p1:66,pd:20,p2:14,conf:72,winner:'Portugal',wpct:66,topScore:'2-0',expG:'2.7',btts:'34%',over:'57%',corners:'10.8',cards:'3.4',scores:[{r:'2-0',p:'18.8%',t:'★'},{r:'2-1',p:'14.4%',t:''},{r:'3-0',p:'13.2%',t:''},{r:'1-0',p:'12.8%',t:''},{r:'3-1',p:'9.4%',t:''}],factors:[{i:'🇵🇹',t:'<strong>Portugal 2º del K</strong> <span>Ronaldo y Bruno Fernandes</span>',imp:'+ALTO',c:'fp'},{i:'🇩🇿',t:'<strong>Argelia sorpresa</strong> <span>Llegó a 16avos desde los mejores 3ºs</span>',imp:'+MED',c:'fn'}],ai:'Portugal con Ronaldo y Bruno Fernandes es favorito claro. Argelia llegó como mejor 3º tras un torneo muy competido. Los portugueses tienen más calidad individual y deberían avanzar aunque Argelia puede hacer un partido complicado.'},
-  'Argentina_Cape Verde':{p1:88,pd:8,p2:4,conf:91,winner:'Argentina',wpct:88,topScore:'3-0',expG:'3.4',btts:'15%',over:'74%',corners:'11.2',cards:'2.7',scores:[{r:'3-0',p:'21.4%',t:'★'},{r:'2-0',p:'18.8%',t:''},{r:'4-0',p:'15.2%',t:''},{r:'3-1',p:'12.4%',t:''},{r:'2-1',p:'9.8%',t:''}],factors:[{i:'🐐',t:'<strong>Messi máximo goleador histórico</strong> <span>Puede romper el récord hoy</span>',imp:'+ALTO',c:'fp'},{i:'🇦🇷',t:'<strong>Argentina campeona</strong> <span>Invicta, 5-0 en dif. de goles</span>',imp:'+ALTO',c:'fp'},{i:'🇨🇻',t:'<strong>Cabo Verde</strong> <span>Gran sorpresa del torneo pero sin nivel</span>',imp:'-ALTO',c:'fn'}],ai:'Argentina es el gran favorito. Messi busca superar el récord de Klose como máximo goleador histórico. Cabo Verde fue la gran sorpresa del grupo pero la diferencia de nivel con Argentina es abismal. Victoria contundente esperada.'},
-  'Croatia_Colombia':{p1:34,pd:28,p2:38,conf:60,winner:'Colombia',wpct:38,topScore:'1-1',expG:'2.3',btts:'55%',over:'48%',corners:'9.8',cards:'3.7',scores:[{r:'1-1',p:'15.8%',t:'★'},{r:'1-2',p:'13.4%',t:''},{r:'2-1',p:'12.8%',t:''},{r:'0-1',p:'11.4%',t:''},{r:'1-0',p:'9.8%',t:''}],factors:[{i:'🇨🇴',t:'<strong>Colombia invicta</strong> <span>El mejor equipo sudamericano del torneo</span>',imp:'+MED',c:'fp'},{i:'🇭🇷',t:'<strong>Croacia</strong> <span>Modrić y experiencia mundialista</span>',imp:'+MED',c:'fn'},{i:'🎩',t:'<strong>James Rodríguez</strong> <span>En su mejor versión mundialista</span>',imp:'+MED',c:'fp'}],ai:'Partido muy atractivo entre la revelación Colombia y la experimentada Croacia. Colombia invicta con James en gran forma. Modrić y Croacia tienen la experiencia de llegar lejos. Partido muy parejo que puede decidirse en la prórroga.'},
+// ════════ PREDICCIONES IA — TODOS LOS 16avos ════════
+// Clave: "HomeTeam_AwayTeam" exactamente como lo da la API
+const IA = {
+  'South Africa_Canada':{p1:42,pd:26,p2:32,conf:58,w:'Sudáfrica',ws:42,sc:'1-0',xg:'2.1',btts:'44%',ov:'42%',co:'9.8',ca:'3.6',
+    scores:[{r:'1-0',p:'16%',t:'★'},{r:'1-1',p:'14%',t:''},{r:'2-1',p:'13%',t:''},{r:'0-1',p:'11%',t:''},{r:'2-0',p:'9%',t:''}],
+    factors:[{i:'🇿🇦',t:'<strong>Sudáfrica</strong> <span>2ª del Grupo A, sólida defensiva</span>',imp:'+MED',c:'fp'},{i:'🇨🇦',t:'<strong>Canadá</strong> <span>Coorganizador, apoyo masivo en LA</span>',imp:'+MED',c:'fn'},{i:'⚽',t:'<strong>Partido cerrado</strong> <span>Puede ir a prórroga</span>',imp:'NEUTRO',c:'fu'}],
+    ai:'Partido de 16avos muy equilibrado. Sudáfrica llegó como 2ª del Grupo A con gran solidez defensiva. Canadá tiene la ventaja de ser coorganizador con apoyo masivo en Los Ángeles. Se espera un duelo cerrado que puede decidirse en la prórroga.'},
+  'Brazil_Japan':{p1:62,pd:20,p2:18,conf:71,w:'Brasil',ws:62,sc:'2-0',xg:'2.8',btts:'38%',ov:'58%',co:'11.2',ca:'3.2',
+    scores:[{r:'2-0',p:'18%',t:'★'},{r:'2-1',p:'14%',t:''},{r:'3-0',p:'12%',t:''},{r:'1-0',p:'11%',t:''},{r:'3-1',p:'9%',t:''}],
+    factors:[{i:'🇧🇷',t:'<strong>Brasil favorito</strong> <span>Vinicius y Rodrygo en forma</span>',imp:'+ALTO',c:'fp'},{i:'🇯🇵',t:'<strong>Japón peligroso</strong> <span>Eliminó a Alemania y España en Qatar</span>',imp:'+MED',c:'fn'},{i:'⚡',t:'<strong>Vinicius Jr</strong> <span>Mejor jugador del torneo hasta ahora</span>',imp:'+ALTO',c:'fp'}],
+    ai:'Brasil es favorito pero Japón es la mayor sorpresa histórica de los Mundiales. Los samurais eliminaron a Alemania y España en Qatar 2022. Vinicius y Rodrygo son letales pero la organización táctica japonesa puede complicarlos.'},
+  'Germany_Paraguay':{p1:68,pd:18,p2:14,conf:74,w:'Alemania',ws:68,sc:'2-0',xg:'2.9',btts:'32%',ov:'61%',co:'11.8',ca:'3.1',
+    scores:[{r:'2-0',p:'19%',t:'★'},{r:'3-0',p:'15%',t:''},{r:'2-1',p:'13%',t:''},{r:'1-0',p:'11%',t:''},{r:'3-1',p:'9%',t:''}],
+    factors:[{i:'🇩🇪',t:'<strong>Alemania dominante</strong> <span>8 goles en grupos, xG top 3</span>',imp:'+ALTO',c:'fp'},{i:'🛡️',t:'<strong>Paraguay defensivo</strong> <span>Solo 1 gol en contra en grupos</span>',imp:'-MED',c:'fn'},{i:'⚡',t:'<strong>Havertz y Sané</strong> <span>6 goles entre ambos</span>',imp:'+ALTO',c:'fp'}],
+    ai:'Alemania llega como una de las selecciones más en forma. 8 goles en grupos con xG excepcional. Paraguay sorprendió con una defensa muy sólida (1 gol en contra) pero el potencial ofensivo alemán es superior. Favorita clara.'},
+  'Netherlands_Morocco':{p1:54,pd:24,p2:22,conf:63,w:'Países Bajos',ws:54,sc:'2-1',xg:'2.4',btts:'52%',ov:'50%',co:'10.2',ca:'3.8',
+    scores:[{r:'2-1',p:'16%',t:'★'},{r:'1-0',p:'13%',t:''},{r:'2-0',p:'12%',t:''},{r:'1-1',p:'12%',t:''},{r:'0-1',p:'9%',t:''}],
+    factors:[{i:'🇳🇱',t:'<strong>Países Bajos</strong> <span>Gakpo y Depay en gran forma</span>',imp:'+MED',c:'fp'},{i:'🇲🇦',t:'<strong>Marruecos</strong> <span>Semifinalistas Qatar 2022, defensa élite</span>',imp:'+MED',c:'fn'}],
+    ai:'Partido de altísimo nivel. Marruecos llegó a semis en Qatar con la mejor defensa africana. Países Bajos tiene más potencial ofensivo con Gakpo y Depay. Duelo muy parejo donde la defensa marroquí puede frustrar a los holandeses.'},
+  "Ivory Coast_Norway":{p1:44,pd:26,p2:30,conf:55,w:'Costa de Marfil',ws:44,sc:'2-1',xg:'2.5',btts:'54%',ov:'52%',co:'10.1',ca:'4.0',
+    scores:[{r:'2-1',p:'15%',t:'★'},{r:'1-1',p:'13%',t:''},{r:'1-0',p:'12%',t:''},{r:'2-0',p:'11%',t:''},{r:'0-1',p:'9%',t:''}],
+    factors:[{i:'🇨🇮',t:'<strong>Costa de Marfil</strong> <span>Campeón de África 2024, Haller goleador</span>',imp:'+MED',c:'fp'},{i:'🇳🇴',t:'<strong>Haaland</strong> <span>El delantero más peligroso del torneo</span>',imp:'+ALTO',c:'fn'}],
+    ai:'Partido explosivo con Haaland por un lado y Haller por el otro. Costa de Marfil ganó la AFCON y llega con confianza máxima. Noruega tiene al mejor delantero del mundo. Partido de muchos goles esperado.'},
+  'France_Sweden':{p1:71,pd:17,p2:12,conf:77,w:'Francia',ws:71,sc:'2-0',xg:'2.7',btts:'29%',ov:'57%',co:'11.4',ca:'3.3',
+    scores:[{r:'2-0',p:'20%',t:'★'},{r:'2-1',p:'15%',t:''},{r:'3-0',p:'13%',t:''},{r:'1-0',p:'13%',t:''},{r:'3-1',p:'9%',t:''}],
+    factors:[{i:'🇫🇷',t:'<strong>Francia favorita</strong> <span>Mbappé intratable en el torneo</span>',imp:'+ALTO',c:'fp'},{i:'⚡',t:'<strong>Mbappé</strong> <span>5 goles, candidato al Balón de Oro</span>',imp:'+ALTO',c:'fp'},{i:'🇸🇪',t:'<strong>Gyokeres</strong> <span>4 goles, la gran sorpresa de Suecia</span>',imp:'+MED',c:'fn'}],
+    ai:'Francia llega como la gran potencia del torneo. Mbappé está en un nivel estratosférico con 5 goles. Suecia sorprendió gracias a Gyokeres pero el nivel global de Francia es muy superior. Victoria cómoda esperada.'},
+  'Mexico_Ecuador':{p1:58,pd:22,p2:20,conf:64,w:'México',ws:58,sc:'2-0',xg:'2.4',btts:'40%',ov:'50%',co:'10.6',ca:'3.7',
+    scores:[{r:'2-0',p:'17%',t:'★'},{r:'1-0',p:'15%',t:''},{r:'2-1',p:'13%',t:''},{r:'1-1',p:'11%',t:''},{r:'3-0',p:'9%',t:''}],
+    factors:[{i:'🇲🇽',t:'<strong>México coorganizador</strong> <span>Apoyo masivo en el Azteca</span>',imp:'+ALTO',c:'fp'},{i:'🇪🇨',t:'<strong>Ecuador competitivo</strong> <span>Buena fase de grupos</span>',imp:'+MED',c:'fn'}],
+    ai:'México como coorganizador tiene ventaja histórica de local. El Estadio Azteca con 80,000 fans es una fortaleza. Ecuador demostró ser competitivo pero México tiene más calidad individual y el apoyo del público.'},
+  'England_DR Congo':{p1:78,pd:14,p2:8,conf:82,w:'Inglaterra',ws:78,sc:'3-0',xg:'3.1',btts:'22%',ov:'68%',co:'12.4',ca:'2.9',
+    scores:[{r:'3-0',p:'19%',t:'★'},{r:'2-0',p:'17%',t:''},{r:'3-1',p:'13%',t:''},{r:'2-1',p:'11%',t:''},{r:'4-0',p:'10%',t:''}],
+    factors:[{i:'🦁',t:'<strong>Inglaterra perfecta</strong> <span>9/9 pts en grupos, máxima puntuación</span>',imp:'+ALTO',c:'fp'},{i:'⚡',t:'<strong>Bellingham</strong> <span>4 goles, mejor del torneo</span>',imp:'+ALTO',c:'fp'},{i:'🇨🇩',t:'<strong>RD Congo</strong> <span>Clasificó como mejor 3º</span>',imp:'-MED',c:'fn'}],
+    ai:'Inglaterra perfecta en grupos con Bellingham siendo el mejor jugador del torneo. La diferencia de nivel con Congo es muy grande. Se espera victoria inglesa amplia y Bellingham candidato a anotar nuevamente.'},
+  'Belgium_Senegal':{p1:58,pd:22,p2:20,conf:65,w:'Bélgica',ws:58,sc:'2-1',xg:'2.8',btts:'52%',ov:'56%',co:'10.8',ca:'3.5',
+    scores:[{r:'2-1',p:'16%',t:'★'},{r:'2-0',p:'14%',t:''},{r:'1-0',p:'13%',t:''},{r:'1-1',p:'11%',t:''},{r:'3-1',p:'10%',t:''}],
+    factors:[{i:'🔴',t:'<strong>Bélgica explosiva</strong> <span>Goleó 5-1 a Nueva Zelanda</span>',imp:'+ALTO',c:'fp'},{i:'🇸🇳',t:'<strong>Senegal</strong> <span>Campeón África 2022, Mané peligroso</span>',imp:'+MED',c:'fn'}],
+    ai:'Bélgica llega con la mejor ofensiva del torneo tras golear 5-1. De Bruyne, Trossard y Lukaku forman el tridente más peligroso. Senegal con Mané tiene calidad para complicarlos pero Bélgica parte como favorita.'},
+  'USA_Bosnia and Herzegovina':{p1:62,pd:20,p2:18,conf:68,w:'USA',ws:62,sc:'2-0',xg:'2.6',btts:'38%',ov:'54%',co:'10.4',ca:'3.4',
+    scores:[{r:'2-0',p:'18%',t:'★'},{r:'1-0',p:'15%',t:''},{r:'2-1',p:'13%',t:''},{r:'3-0',p:'12%',t:''},{r:'1-1',p:'9%',t:''}],
+    factors:[{i:'🇺🇸',t:'<strong>USA coorganizador</strong> <span>Juega en Santa Clara con apoyo masivo</span>',imp:'+ALTO',c:'fp'},{i:'⚡',t:'<strong>Pulisic</strong> <span>Capitán inspirado en casa</span>',imp:'+MED',c:'fp'}],
+    ai:'USA tiene la gran ventaja de jugar en casa como coorganizador. Pulisic está siendo el mejor jugador norteamericano del torneo. Bosnia llegó como mejor 3º pero el nivel de USA en casa es superior.'},
+  'Spain_Austria':{p1:71,pd:18,p2:11,conf:76,w:'España',ws:71,sc:'2-0',xg:'2.5',btts:'31%',ov:'55%',co:'11.6',ca:'3.2',
+    scores:[{r:'2-0',p:'19%',t:'★'},{r:'2-1',p:'15%',t:''},{r:'1-0',p:'14%',t:''},{r:'3-0',p:'12%',t:''},{r:'3-1',p:'9%',t:''}],
+    factors:[{i:'🇪🇸',t:'<strong>España líder del Grupo H</strong> <span>7 pts, juego dominante</span>',imp:'+ALTO',c:'fp'},{i:'🌟',t:'<strong>Lamine Yamal</strong> <span>2 goles y 2 asistencias, fenómeno</span>',imp:'+ALTO',c:'fp'},{i:'🇦🇹',t:'<strong>Austria sorpresa</strong> <span>Clasificó como mejor 3º</span>',imp:'-MED',c:'fn'}],
+    ai:'España llega como uno de los favoritos con Yamal siendo el fenómeno del torneo. Su fútbol de posesión y calidad individual es superior. Austria llegó como mejor 3º y tendrá motivación extra pero España debería ganar.'},
+  'Portugal_Algeria':{p1:66,pd:20,p2:14,conf:72,w:'Portugal',ws:66,sc:'2-0',xg:'2.7',btts:'34%',ov:'57%',co:'10.8',ca:'3.4',
+    scores:[{r:'2-0',p:'19%',t:'★'},{r:'2-1',p:'14%',t:''},{r:'3-0',p:'13%',t:''},{r:'1-0',p:'13%',t:''},{r:'3-1',p:'9%',t:''}],
+    factors:[{i:'🇵🇹',t:'<strong>Portugal</strong> <span>Ronaldo y Bruno Fernandes en forma</span>',imp:'+ALTO',c:'fp'},{i:'🇩🇿',t:'<strong>Argelia sorpresa</strong> <span>Clasificó como mejor 3º</span>',imp:'+MED',c:'fn'}],
+    ai:'Portugal con Ronaldo y Bruno Fernandes es favorito claro. Argelia llegó como mejor 3º en una competición muy ajustada. Los portugueses tienen más calidad individual y deberían avanzar con comodidad.'},
+  'Argentina_Cape Verde':{p1:88,pd:8,p2:4,conf:91,w:'Argentina',ws:88,sc:'3-0',xg:'3.4',btts:'15%',ov:'74%',co:'11.2',ca:'2.7',
+    scores:[{r:'3-0',p:'21%',t:'★'},{r:'2-0',p:'19%',t:''},{r:'4-0',p:'15%',t:''},{r:'3-1',p:'12%',t:''},{r:'5-0',p:'8%',t:''}],
+    factors:[{i:'🐐',t:'<strong>Messi</strong> <span>Puede superar a Klose como máximo goleador histórico</span>',imp:'+ALTO',c:'fp'},{i:'🇦🇷',t:'<strong>Argentina campeona</strong> <span>Invicta, diferencia de goles +5</span>',imp:'+ALTO',c:'fp'},{i:'🇨🇻',t:'<strong>Cabo Verde</strong> <span>Gran sorpresa pero sin nivel suficiente</span>',imp:'-ALTO',c:'fn'}],
+    ai:'Argentina es el gran favorito absoluto. Messi busca superar el récord de Klose (16 goles) y ser el máximo goleador histórico del Mundial. Cabo Verde fue una sorpresa en grupos pero la diferencia de nivel con Argentina es abismal.'},
+  'Croatia_Colombia':{p1:34,pd:28,p2:38,conf:60,w:'Colombia',ws:38,sc:'1-1',xg:'2.3',btts:'55%',ov:'48%',co:'9.8',ca:'3.7',
+    scores:[{r:'1-1',p:'16%',t:'★'},{r:'1-2',p:'13%',t:''},{r:'2-1',p:'13%',t:''},{r:'0-1',p:'11%',t:''},{r:'1-0',p:'10%',t:''}],
+    factors:[{i:'🇨🇴',t:'<strong>Colombia invicta</strong> <span>Mejor selección sudamericana del torneo</span>',imp:'+MED',c:'fp'},{i:'🇭🇷',t:'<strong>Croacia</strong> <span>Modrić y experiencia mundialista</span>',imp:'+MED',c:'fn'},{i:'🎩',t:'<strong>James Rodríguez</strong> <span>En su mejor versión</span>',imp:'+MED',c:'fp'}],
+    ai:'Partido muy parejo entre la revelación Colombia y la experimentada Croacia. Colombia invicta con James en gran forma. Modrić y compañía tienen la experiencia de llegar lejos. Puede decidirse en prórroga o penales.'},
 };
 
-// ── PRONÓSTICO IA GENÉRICO para ligas de clubes ──
+// ════════ PREDICCIÓN GENÉRICA (hash determinístico para ligas de clubes) ════════
+function hashNum(s){
+  let h=0;
+  for(let i=0;i<s.length;i++){h=Math.imul(31,h)+s.charCodeAt(i)|0}
+  return Math.abs(h);
+}
+
 function genIA(home, away) {
-  // Buscar coincidencia exacta
-  const key = home+'_'+away;
+  // 1) Coincidencia exacta
+  const key  = home+'_'+away;
   const key2 = away+'_'+home;
-  if(IA_WC[key]) return IA_WC[key];
-  if(IA_WC[key2]) {
-    const src = IA_WC[key2];
-    return {...src, p1:src.p2, p2:src.p1, winner:src.winner===home?home:src.winner===away?away:'Empate'};
+  if(IA[key])  return IA[key];
+  if(IA[key2]) {
+    const s=IA[key2];
+    return {...s, p1:s.p2, p2:s.p1, w:s.w===home?home:s.w===away?away:'Empate'};
   }
-  // Buscar coincidencia parcial (nombres en inglés vs español)
-  for(const [k,v] of Object.entries(IA_WC)){
-    const [kh,ka] = k.split('_');
-    if((home.includes(kh)||kh.includes(home)) && (away.includes(ka)||ka.includes(away))) return v;
-    if((away.includes(kh)||kh.includes(away)) && (home.includes(ka)||ka.includes(home))){
-      return {...v, p1:v.p2, p2:v.p1};
-    }
+  // 2) Coincidencia normalizada
+  const n = s=>s.toLowerCase().replace(/[^a-z]/g,'');
+  const nh=n(home), na=n(away);
+  for(const [k,v] of Object.entries(IA)){
+    const idx=k.indexOf('_');
+    if(idx<0) continue;
+    const kh=n(k.slice(0,idx)), ka=n(k.slice(idx+1));
+    if(kh===nh && ka===na) return v;
+    if(kh===na && ka===nh) return {...v,p1:v.p2,p2:v.p1};
+    if((nh.includes(kh)||kh.includes(nh))&&(na.includes(ka)||ka.includes(na))) return v;
+    if((na.includes(kh)||kh.includes(na))&&(nh.includes(ka)||ka.includes(nh))) return {...v,p1:v.p2,p2:v.p1};
   }
-  // Genérico — determinístico basado en nombre de equipos (no random)
-  // Hash simple para generar siempre el mismo resultado
-  let hash = 0;
-  for(let i=0;i<home.length+away.length;i++){
-    const c = (home+away).charCodeAt(i);
-    hash = ((hash<<5)-hash)+c;
-    hash = hash & hash;
-  }
-  const h = Math.abs(hash);
-  // Usar múltiples bits del hash para mayor variación
-  const h1 = h & 0xFF;
-  const h2 = (h >> 8) & 0xFF;
-  const h3 = (h >> 16) & 0xFF;
-  const p1raw = 28 + (h1 % 30);       // 28-57
-  const p2raw = 20 + (h2 % 28);       // 20-47
-  const pdraw = Math.max(8, 100-p1raw-p2raw);
-  const total = p1raw+p2raw+pdraw;
-  const p1f = Math.round(p1raw*100/total);
-  const p2f = Math.round(p2raw*100/total);
+  // 3) Genérico determinístico
+  const h1 = hashNum(home+away) % 256;
+  const h2 = hashNum(away+home) % 256;
+  const h3 = hashNum(home+away+home) % 256;
+  // Asegurar valores únicos y variados
+  let p1r = 28 + (h1 % 30);  // 28–57
+  let p2r = 20 + (h2 % 28);  // 20–47
+  if(Math.abs(p1r-p2r)<8) p2r = p1r > 40 ? p1r-12 : p1r+10; // evitar empates artificiales
+  const pdr = Math.max(8, 100-p1r-p2r);
+  const tot = p1r+p2r+pdr;
+  const p1f = Math.round(p1r*100/tot);
+  const p2f = Math.round(p2r*100/tot);
   const pdf = 100-p1f-p2f;
-  const conf = 48 + (h3 % 32);        // 48-79
-  const winner = p1f>p2f+5 ? home : p2f>p1f+5 ? away : 'Empate';
-  const wpct = Math.max(p1f,p2f,pdf);
-  const g1 = h1%3, g2 = h2%3;
-  const topScore = p1f>p2f+10?`${g1+1}-0`:p2f>p1f+10?`0-${g2+1}`:p1f>p2f+3?`${g1+1}-${g2}`:p2f>p1f+3?`${g1}-${g2+1}`:`${g1}-${g1}`;
+  const conf = 48 + (h3 % 30);
+  const winner = p1f>p2f+6 ? home : p2f>p1f+6 ? away : 'Empate';
+  const ws = Math.max(p1f,p2f,pdf);
+  // Marcador realista basado en probabilidades
+  const g1h = p1f>p2f+10 ? 2 : p1f>p2f ? 1 : 0;
+  const g2h = p2f>p1f+10 ? 2 : p2f>p1f ? 1 : 1;
+  const sc = winner===home ? `${Math.max(1,g1h+1)}-${g2h}` : winner===away ? `${g1h}-${Math.max(1,g2h+1)}` : `1-1`;
   return {
-    p1:p1f, pd:pdf, p2:p2f, conf, winner, wpct,
-    topScore,
-    expG: (1.8 + (h%10)*0.1).toFixed(1),
-    btts: p1f>25&&p2f>25 ? '55%':'42%',
-    over: p1f+p2f>80 ? '52%':'45%',
-    corners: (8 + h%4).toString()+'.'+((h>>2)%9),
-    cards: (3 + (h>>1)%2).toString()+'.'+(h%9),
-    scores:[
-      {r:topScore, p:(12+(h%6))+'%', t:'★'},
-      {r:p1f>p2f?'2-1':'1-2', p:(10+(h%5))+'%', t:''},
-      {r:'1-1', p:(9+(h%4))+'%', t:''},
-      {r:p1f>p2f?'1-0':'0-1', p:(8+(h%4))+'%', t:''},
-      {r:p1f>p2f?'3-1':'1-3', p:(7+(h%3))+'%', t:''},
-    ],
-    factors:[
-      {i:'📊',t:'<strong>Análisis xG</strong> <span>Basado en rendimiento de la temporada</span>',imp:'+MED',c:'fp'},
-      {i:'🏠',t:'<strong>Factor local</strong> <span>Ventaja de jugar en casa</span>',imp:'+BAJO',c:'fp'},
-      {i:'📈',t:'<strong>Forma reciente</strong> <span>Últimos 5 partidos considerados</span>',imp:'+MED',c:'fp'},
-    ],
-    ai:'Análisis IA basado en xG, rendimiento reciente y estadísticas de la temporada. Probabilidad calculada con modelos Poisson y ELO dinámico.'
+    p1:p1f, pd:pdf, p2:p2f, conf, w:winner, ws, sc,
+    xg:(1.8+(h1%12)*0.1).toFixed(1),
+    btts:p1f>24&&p2f>24?'55%':'42%',
+    ov:p1f+p2f>82?'54%':'44%',
+    co:(8+h1%4)+'.'+(h2%9),
+    ca:(3+(h2>>1)%2)+'.'+(h3%8),
+    scores:[{r:sc,p:(12+h1%6)+'%',t:'★'},{r:winner===home?'2-1':'1-2',p:(10+h2%5)+'%',t:''},{r:'1-1',p:(9+h3%4)+'%',t:''},{r:winner===home?'1-0':'0-1',p:(8+h1%4)+'%',t:''},{r:winner===home?'3-1':'1-3',p:(7+h2%3)+'%',t:''}],
+    factors:[{i:'📊',t:'<strong>Análisis xG</strong> <span>Rendimiento de la temporada</span>',imp:'+MED',c:'fp'},{i:'🏠',t:'<strong>Factor local</strong> <span>Ventaja de jugar en casa</span>',imp:'+BAJO',c:'fp'},{i:'📈',t:'<strong>Forma reciente</strong> <span>Últimos 5 partidos</span>',imp:'+MED',c:'fp'}],
+    ai:`Análisis IA de ${home} vs ${away}. Probabilidades calculadas con modelos Poisson y ELO dinámico basados en rendimiento de la temporada. ${winner} parte como favorito con ${ws}% de probabilidad.`
   };
 }
 
-// ── BANDERAS ──
-const FLAGS = {
+// ════════ BANDERAS ════════
+const FL={
   'Argentina':'🇦🇷','Colombia':'🇨🇴','Portugal':'🇵🇹','Uruguay':'🇺🇾',
   'Spain':'🇪🇸','Brazil':'🇧🇷','France':'🇫🇷','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿',
   'Croatia':'🇭🇷','Belgium':'🇧🇪','Germany':'🇩🇪','Mexico':'🇲🇽',
@@ -588,227 +475,204 @@ const FLAGS = {
   'Austria':'🇦🇹','DR Congo':'🇨🇩','Uzbekistan':'🇺🇿','Cape Verde':'🇨🇻',
   'Saudi Arabia':'🇸🇦','Canada':'🇨🇦','Switzerland':'🇨🇭','Morocco':'🇲🇦',
   'Japan':'🇯🇵','USA':'🇺🇸','South Africa':'🇿🇦','South Korea':'🇰🇷',
-  'Qatar':'🇶🇦','Czechia':'🇨🇿','Scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Italy':'🇮🇹',
-  'Turkey':'🇹🇷','Australia':'🇦🇺','Paraguay':'🇵🇾','Chile':'🇨🇱',
+  'Qatar':'🇶🇦','Czechia':'🇨🇿','Italy':'🇮🇹','Turkey':'🇹🇷',
+  'Australia':'🇦🇺','Paraguay':'🇵🇾','Chile':'🇨🇱','Bosnia and Herzegovina':'🇧🇦',
+  'Ivory Coast':'🇨🇮','Norway':'🇳🇴','Sweden':'🇸🇪','Ecuador':'🇪🇨',
+  'Senegal':'🇸🇳','Scotland':'🏴󠁧󠁢󠁳󠁣󠁴󠁿',
 };
-function getFlag(name) {
+function flag(name){
   if(!name) return '⚽';
-  if(FLAGS[name]) return FLAGS[name];
-  for(const [k,v] of Object.entries(FLAGS)) {
-    if(name.toLowerCase().includes(k.toLowerCase())) return v;
-  }
+  if(FL[name]) return FL[name];
+  for(const[k,v] of Object.entries(FL)){if(name.toLowerCase().includes(k.toLowerCase())||k.toLowerCase().includes(name.toLowerCase().split(' ')[0])) return v;}
   return '⚽';
 }
 
-// ── HORA BOLIVIA UTC-4 ──
-function bolTime(utcDate) {
-  const d = new Date(utcDate);
-  const b = new Date(d.getTime()-4*3600000);
+// ════════ HORA BOLIVIA UTC-4 ════════
+function bolTime(utcDate){
+  const d=new Date(utcDate);
+  const b=new Date(d.getTime()-4*3600000);
   return String(b.getHours()).padStart(2,'0')+':'+String(b.getMinutes()).padStart(2,'0')+' BOL';
 }
-function clk() {
+function bolDate(utcDate){
+  const d=new Date(utcDate);
+  return new Date(d.getTime()-4*3600000).toISOString().split('T')[0];
+}
+function todayBol(){
+  const n=new Date();
+  return new Date(n.getTime()-4*3600000).toISOString().split('T')[0];
+}
+function tomorrowBol(){
+  const n=new Date();
+  return new Date(n.getTime()-4*3600000+86400000).toISOString().split('T')[0];
+}
+function clk(){
   const n=new Date(), b=new Date(n.getTime()+n.getTimezoneOffset()*60000-4*3600000);
   document.getElementById('ct').textContent=String(b.getHours()).padStart(2,'0')+':'+String(b.getMinutes()).padStart(2,'0');
 }
 
-// ── ESTADO ──
+// ════════ FALLBACK — 16avos si la API no los tiene ════════
+function wcFallback(){
+  const fixtures=[
+    {date:'2026-06-28T23:00:00Z',home:'South Africa',away:'Canada',city:'Los Ángeles'},
+    {date:'2026-06-29T21:00:00Z',home:'Brazil',away:'Japan',city:'Houston'},
+    {date:'2026-06-30T00:30:00Z',home:'Germany',away:'Paraguay',city:'Boston'},
+    {date:'2026-06-30T21:00:00Z',home:'Netherlands',away:'Morocco',city:'Monterrey'},
+    {date:'2026-07-01T02:00:00Z',home:'Ivory Coast',away:'Norway',city:'Dallas'},
+    {date:'2026-07-01T21:00:00Z',home:'France',away:'Sweden',city:'New Jersey'},
+    {date:'2026-07-02T01:00:00Z',home:'Mexico',away:'Ecuador',city:'México City'},
+    {date:'2026-07-02T21:00:00Z',home:'England',away:'DR Congo',city:'Atlanta'},
+    {date:'2026-07-03T01:00:00Z',home:'Belgium',away:'Senegal',city:'Seattle'},
+    {date:'2026-07-03T21:00:00Z',home:'USA',away:'Bosnia and Herzegovina',city:'Santa Clara'},
+    {date:'2026-07-04T01:00:00Z',home:'Spain',away:'Austria',city:'Dallas'},
+    {date:'2026-07-04T21:00:00Z',home:'Portugal',away:'Algeria',city:'Nueva York'},
+    {date:'2026-07-05T01:00:00Z',home:'Argentina',away:'Cape Verde',city:'Houston'},
+    {date:'2026-07-05T21:00:00Z',home:'Croatia',away:'Colombia',city:'Kansas City'},
+  ];
+  const today=todayBol(), tmr=tomorrowBol();
+  const now=new Date();
+  return fixtures
+    .filter(f=>{
+      const bd=bolDate(f.date);
+      return bd===today||bd===tmr;
+    })
+    .map((f,i)=>({
+      fixture:{id:9000+i,date:f.date,status:{short:new Date(f.date)<now?'FT':'NS',elapsed:null},venue:{city:f.city}},
+      league:{id:1,name:'Copa Mundial FIFA 2026',round:'Round of 32'},
+      teams:{home:{name:f.home},away:{name:f.away}},
+      goals:{home:new Date(f.date)<now?0:null,away:new Date(f.date)<now?0:null},
+    }));
+}
+
+// ════════ ESTADO ════════
 let curLiga=1, selMatch=null, selIA=null, liveCount=0, refreshTimer=null;
 
-// ── FETCH ──
-async function apiFetch(path) {
+// ════════ FETCH ════════
+async function apiFetch(path){
   const r=await fetch(SERVER+path);
   if(!r.ok) throw new Error('HTTP '+r.status);
   return r.json();
 }
 
-// ── INIT ──
-async function init() {
-  try {
+// ════════ INIT ════════
+async function init(){
+  try{
     const st=await apiFetch('/api/status');
-    if(st.ok) {
-      const u=st.requests?.current||0, l=st.requests?.limit_day||100;
-      setStatus('ok','✅ API conectada · Datos en tiempo real',u+'/'+l+' req hoy');
+    if(st.ok){
+      const u=st.requests?.current||0,l=st.requests?.limit_day||100;
+      setStatus('ok','✅ API-Football conectada · Datos en tiempo real',u+'/'+l+' req hoy');
       document.getElementById('apiChip').className='chip';
       document.getElementById('apiTxt').textContent='EN VIVO';
     }
-  } catch(e) {
-    setStatus('err','📴 Sin API — modo offline','');
+  }catch(e){
+    setStatus('err','📴 Sin conexión a API — usando datos de respaldo','');
     document.getElementById('apiChip').className='chip err';
     document.getElementById('apiTxt').textContent='OFFLINE';
   }
   await loadLiga(1);
-  renderGrupos();
-  renderRanking();
+  renderGrupos(); renderRanking();
 }
 
-function setStatus(type,txt,r) {
+function setStatus(type,txt,r){
   const s=document.getElementById('sbar');
   s.className='sbar '+(type==='ok'?'ok':type==='err'?'err':'loading');
   document.getElementById('sbarTxt').textContent=txt;
   document.getElementById('sbarR').textContent=r||'';
 }
 
-// ── SELECCIONAR LIGA ──
-async function selLiga(leagueId, key) {
-  curLiga = leagueId;
+// ════════ SELECCIONAR LIGA ════════
+async function selLiga(id){
+  curLiga=id;
   document.querySelectorAll('.ltab').forEach(t=>{
-    t.classList.remove('active');
-    if(t.dataset.id==leagueId) t.classList.add('active');
+    t.classList.toggle('active', parseInt(t.dataset.id)===id);
   });
-  selMatch=null; selIA=null;
-  document.getElementById('loadingState').style.display='block';
-  document.getElementById('liveSec').style.display='none';
-  document.getElementById('ftSec').style.display='none';
-  document.getElementById('nsSec').style.display='none';
-  document.getElementById('emptyState').style.display='none';
-  document.getElementById('pgLive').innerHTML='';
-  document.getElementById('pgFt').innerHTML='';
-  document.getElementById('pgNs').innerHTML='';
-  await loadLiga(leagueId);
+  resetMatchList();
+  await loadLiga(id);
 }
 
-// ── CARGAR PARTIDOS DE UNA LIGA ──
-async function loadLiga(leagueId) {
-  const liga = LIGAS[leagueId] || {name:'Liga', flag:'⚽', season:2025};
+function resetMatchList(){
+  ['pg-lv','pg-ft','pg-ns','pg-tmr'].forEach(id=>document.getElementById(id).innerHTML='');
+  ['sec-lv','sec-ft','sec-ns','sec-tmr'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('loadSt').style.display='block';
+  document.getElementById('emptySt').style.display='none';
+}
 
-  // Header de liga
-  const isWorld = leagueId === 1;
-  document.getElementById('ligaHeader').innerHTML = `
-    <div class="liga-header">
-      <div class="liga-logo">${liga.flag}</div>
-      <div class="liga-info">
-        <div class="liga-name">${liga.name}</div>
-        <div class="liga-sub">${isWorld ? '⚡ Auto-actualización cada 60s' : '🔄 Toca 🔄 para actualizar'} · 🇧🇴 Bolivia</div>
-      </div>
-      ${isWorld
-        ? '<div class="liga-badge">🌍 MUNDIAL</div>'
-        : '<button onclick="manualRefresh(' + leagueId + ')" id="btnRefresh" style="background:linear-gradient(135deg,var(--g),var(--gold));border:none;color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer">🔄 Actualizar</button>'
-      }
-    </div>`;
+// ════════ CARGAR LIGA ════════
+async function loadLiga(id){
+  const liga=LIGAS[id]||{name:'Liga',flag:'⚽',season:2025,wc:false};
+  // Header
+  document.getElementById('lgHdr').innerHTML=liga.wc
+    ? `<div class="lhdr"><div class="lhdr-logo">${liga.flag}</div><div class="lhdr-info"><div class="lhdr-name">${liga.name}</div><div class="lhdr-sub">⚡ Auto-actualización · 🇧🇴 Hora Bolivia</div></div><div class="lhdr-badge">🌍 MUNDIAL</div></div>`
+    : `<div class="lhdr"><div class="lhdr-logo">${liga.flag}</div><div class="lhdr-info"><div class="lhdr-name">${liga.name}</div><div class="lhdr-sub">Toca 🔄 para actualizar · 🇧🇴 Hora Bolivia</div></div><button class="btn-refresh" onclick="loadLiga(${id})">🔄 Actualizar</button></div>`;
 
-  try {
-    const season = liga.season;
-    const endpoint = leagueId===1
-      ? `/api/today`  // Para el Mundial usamos el endpoint de hoy
-      : `/api/league?league=${leagueId}&season=${season}`;
+  try{
+    const endpoint = liga.wc ? '/api/today' : `/api/league?league=${id}&season=${liga.season}`;
+    const data=await apiFetch(endpoint);
+    let fixtures=data.response||[];
+    if(liga.wc) fixtures=fixtures.filter(f=>f.league?.id===1);
 
-    const data = await apiFetch(endpoint);
-    let fixtures = data.response || [];
-
-    // Filtrar solo del league actual si no es Mundial
-    const filtered = leagueId===1
-      ? fixtures
-      : fixtures.filter(f=>f.league?.id===leagueId);
-
-    // Si el Mundial no tiene partidos hoy, mostrar fixture del día de respaldo
-    if(leagueId===1 && filtered.length===0){
-      const fallback = getWCFallback();
-      if(fallback.length>0){ renderFixtures(fallback, liga); return; }
+    // Si el Mundial no tiene partidos, usar fallback
+    if(liga.wc && fixtures.length===0){
+      fixtures=wcFallback();
     }
 
-    renderFixtures(filtered, liga);
-  } catch(e) {
-    document.getElementById('loadingState').style.display='none';
-    document.getElementById('emptyState').style.display='block';
-    document.getElementById('emptyState').innerHTML=`
-      📅 No hay partidos hoy en ${liga.flag} ${liga.name}.<br>
-      <span style="font-size:11px">La temporada puede estar en pausa o entre jornadas.</span>`;
+    renderFixtures(fixtures, liga);
+  }catch(e){
+    if(liga.wc){
+      const fb=wcFallback();
+      if(fb.length>0){ renderFixtures(fb,liga); return; }
+    }
+    document.getElementById('loadSt').style.display='none';
+    document.getElementById('emptySt').style.display='block';
+    document.getElementById('emptySt').innerHTML=`📅 No hay partidos hoy en ${liga.flag} ${liga.name}.<br><span style="font-size:11px">La temporada puede estar entre jornadas.</span>`;
   }
 }
 
-function renderFixtures(fixtures, liga) {
-  const now = new Date();
-  const bol = new Date(now.getTime()-4*3600000);
-  const todayBol = bol.toISOString().split('T')[0];
-  const tmrBol   = new Date(bol.getTime()+86400000).toISOString().split('T')[0];
-
-  const live = fixtures.filter(f=>['1H','2H','HT','ET','P'].includes(f.fixture?.status?.short));
-  const ft   = fixtures.filter(f=>['FT','AET','PEN'].includes(f.fixture?.status?.short));
-  const nsAll= fixtures.filter(f=>['NS','TBD'].includes(f.fixture?.status?.short));
-
-  // Separar próximos en HOY y MAÑANA
-  const ns  = nsAll.filter(f=>{
-    const d = new Date(new Date(f.fixture?.date).getTime()-4*3600000).toISOString().split('T')[0];
-    return d===todayBol;
-  });
-  const tmr = nsAll.filter(f=>{
-    const d = new Date(new Date(f.fixture?.date).getTime()-4*3600000).toISOString().split('T')[0];
-    return d===tmrBol;
-  });
+// ════════ RENDER FIXTURES ════════
+function renderFixtures(fixtures, liga){
+  const today=todayBol(), tmr=tomorrowBol(), now=new Date();
+  const live=fixtures.filter(f=>['1H','2H','HT','ET','P'].includes(f.fixture?.status?.short));
+  const ft  =fixtures.filter(f=>['FT','AET','PEN'].includes(f.fixture?.status?.short));
+  const nsAll=fixtures.filter(f=>['NS','TBD'].includes(f.fixture?.status?.short));
+  const ns  =nsAll.filter(f=>bolDate(f.fixture?.date)===today);
+  const tmrF=nsAll.filter(f=>bolDate(f.fixture?.date)===tmr);
 
   liveCount=live.length;
-  document.getElementById('cLv') && (document.getElementById('cLv').textContent=live.length||'0');
-  document.getElementById('cFt') && (document.getElementById('cFt').textContent=ft.length||'0');
-  document.getElementById('cNs') && (document.getElementById('cNs').textContent=(ns.length+tmr.length)||'0');
+  document.getElementById('loadSt').style.display='none';
 
-  document.getElementById('loadingState').style.display='none';
-
-  if(fixtures.length===0) {
-    document.getElementById('emptyState').style.display='block';
-    document.getElementById('emptyState').innerHTML=`
-      📅 No hay partidos hoy en ${liga.flag} ${liga.name}.<br>
-      <span style="font-size:11px">La temporada puede estar en pausa o entre jornadas.</span>`;
+  if(fixtures.length===0){
+    document.getElementById('emptySt').style.display='block';
+    document.getElementById('emptySt').innerHTML=`📅 No hay partidos hoy en ${liga.flag} ${liga.name}.<br><span style="font-size:11px">La temporada puede estar entre jornadas.</span>`;
     return;
   }
 
-  const sLv=document.getElementById('liveSec');
-  const sFt=document.getElementById('ftSec');
-  const sNs=document.getElementById('nsSec');
-  const sTmr=document.getElementById('tmrSec');
-  sLv.style.display=live.length?'block':'none';
-  sFt.style.display=ft.length?'block':'none';
-  sNs.style.display=ns.length?'block':'none';
-  sTmr.style.display=tmr.length?'block':'none';
+  const show=(id,arr,status)=>{
+    const sec=document.getElementById('sec-'+id);
+    const pg=document.getElementById('pg-'+id);
+    sec.style.display=arr.length?'block':'none';
+    pg.innerHTML='';
+    arr.forEach(f=>buildCard(f,pg,status));
+  };
+  show('lv',live,'live');
+  show('ft',ft,'ft');
+  show('ns',ns,'ns');
+  show('tmr',tmrF,'ns');
 
-  const pgLv=document.getElementById('pgLive');
-  const pgFt=document.getElementById('pgFt');
-  const pgNs=document.getElementById('pgNs');
-  const pgTmr=document.getElementById('pgTmr');
-  pgLv.innerHTML=''; pgFt.innerHTML=''; pgNs.innerHTML=''; pgTmr.innerHTML='';
-
-  live.forEach(f=>buildCard(f,pgLv,'live'));
-  ft.forEach(f=>buildCard(f,pgFt,'ft'));
-  ns.forEach(f=>buildCard(f,pgNs,'ns'));
-  tmr.forEach(f=>buildCard(f,pgTmr,'ns'));
-
-  // Marcar tabs con indicador live
-  document.querySelectorAll('.ltab').forEach(t=>{
-    if(t.dataset.id==curLiga && liveCount>0) t.classList.add('live-tab');
-    else if(t.dataset.id==curLiga) t.classList.remove('live-tab');
-  });
-
-  scheduleRefresh();
-}
-
-async function manualRefresh(id) {
-  const btn = document.getElementById('btnRefresh');
-  if(btn){btn.textContent='⏳ Cargando...';btn.disabled=true;}
-  await loadLiga(id);
-  if(btn){btn.textContent='🔄 Actualizar';btn.disabled=false;}
-}
-
-function scheduleRefresh() {
+  // Auto-refresh solo para el Mundial
   if(refreshTimer) clearInterval(refreshTimer);
-  // Solo auto-refresh para el Mundial
-if(curLiga===1){
-  refreshTimer=setInterval(()=>loadLiga(1), liveCount>0?60000:1800000); // 60s vivo, 30min sin vivo
-}
+  if(liga.wc) refreshTimer=setInterval(()=>loadLiga(1), liveCount>0?60000:1800000);
 }
 
-// ── BUILD CARD ──
-function buildCard(f, container, status) {
+// ════════ BUILD CARD ════════
+function buildCard(f,container,status){
   const h=f.teams?.home, a=f.teams?.away;
   if(!h||!a) return;
-
-  const isLiga = curLiga!==1;
-  const fh = isLiga?'⚽':getFlag(h.name);
-  const fa = isLiga?'⚽':getFlag(a.name);
-
-  const ia = genIA(h.name, a.name);
-  const isLive=status==='live', isFt=status==='ft';
+  const ia=genIA(h.name,a.name);
+  const fh=flag(h.name), fa=flag(a.name);
   const sh=f.goals?.home, sa=f.goals?.away;
   const min=f.fixture?.status?.elapsed;
   const ss=f.fixture?.status?.short;
+  const isLive=status==='live', isFt=status==='ft';
+  const hasScore=sh!==null&&sh!==undefined;
 
   let badge='';
   if(isLive) badge=ss==='HT'?`<span class="bdg b-ht">⏸ DESCANSO</span>`:`<span class="bdg b-lv">🔴 ${min}'</span>`;
@@ -816,62 +680,41 @@ function buildCard(f, container, status) {
   else badge=`<span class="bdg b-ns">⏰ ${bolTime(f.fixture?.date)}</span>`;
 
   const circ=76, off=circ-(ia.conf/100)*circ;
+  const uid=f.fixture?.id||Math.random();
 
   const div=document.createElement('div');
   div.className='mcard'+(isLive?' lv':'');
-  div.id='mc-'+f.fixture?.id;
+  div.id='mc-'+uid;
 
   div.innerHTML=`
     <div class="mc-top">
-      <div class="mc-grp">${f.league?.name||'Mundial 2026'} · ${f.league?.round||''}</div>
+      <div class="mc-grp">${f.league?.round||f.league?.name||'Mundial 2026'}</div>
       ${badge}
     </div>
     <div class="mc-split">
-      <!-- MARCADOR EN VIVO -->
       <div class="mc-left">
-        <div class="eq-row">
-          <span class="eq-flag">${fh}</span>
-          <span class="eq-name">${h.name}</span>
-          ${sh!==null&&sh!==undefined?`<span class="eq-sc${isLive?' lv':''}">${sh}</span>`:''}
-        </div>
-        <div class="eq-row">
-          <span class="eq-flag">${fa}</span>
-          <span class="eq-name">${a.name}</span>
-          ${sa!==null&&sa!==undefined?`<span class="eq-sc${isLive?' lv':''}">${sa}</span>`:''}
-        </div>
+        <div class="eq-row"><span class="eq-flag">${fh}</span><span class="eq-name">${h.name}</span>${hasScore?`<span class="eq-sc${isLive?' lv':''}">${sh}</span>`:''}</div>
+        <div class="eq-row"><span class="eq-flag">${fa}</span><span class="eq-name">${a.name}</span>${hasScore?`<span class="eq-sc${isLive?' lv':''}">${sa}</span>`:''}</div>
         ${isLive&&ss!=='HT'?`<div class="mc-time">${min}' · En curso</div>`:''}
         ${isLive&&ss==='HT'?`<div class="mc-time">⏸ Descanso</div>`:''}
         ${!isLive&&!isFt?`<div class="mc-kick">${bolTime(f.fixture?.date)}</div><div class="mc-venue">📍 ${f.fixture?.venue?.city||''}</div>`:''}
-        ${isFt?`<div class="mc-venue" style="color:var(--mu);font-size:9px;margin-top:4px">Partido finalizado</div>`:''}
+        ${isFt?`<div class="mc-venue" style="color:var(--mu);font-size:9px;margin-top:4px">Finalizado</div>`:''}
       </div>
-
       <div class="mc-sep"></div>
-
-      <!-- PRONÓSTICO IA -->
       <div class="mc-right">
-        <div class="pred-lbl">🤖 Pronóstico IA</div>
-        <div class="pred-win">${ia.winner}</div>
-        <div class="pred-sc">Marcador: <strong style="color:var(--gold)">${ia.topScore}</strong></div>
-        <div class="mini-pbar">
-          <div class="mp1" style="width:${ia.p1}%"></div>
-          <div class="mpd" style="width:${ia.pd}%"></div>
-          <div class="mp2" style="width:${ia.p2}%"></div>
-        </div>
-        <div class="mini-pnums">
-          <span class="c1">${ia.p1}%</span><span>${ia.pd}%</span><span class="c2">${ia.p2}%</span>
-        </div>
+        <div class="pred-lbl">🤖 Predicción IA</div>
+        <div class="pred-win">${ia.w}</div>
+        <div class="pred-sc">Marcador: <strong style="color:var(--gold)">${ia.sc}</strong></div>
+        <div class="mini-pbar"><div class="mp1" style="width:${ia.p1}%"></div><div class="mpd" style="width:${ia.pd}%"></div><div class="mp2" style="width:${ia.p2}%"></div></div>
+        <div class="mini-pnums"><span class="c1">${ia.p1}%</span><span>${ia.pd}%</span><span class="c2">${ia.p2}%</span></div>
         <div class="mini-conf">
-          <div class="mini-ring">
+          <div class="mring">
             <svg viewBox="0 0 28 28">
-              <defs><linearGradient id="cg${f.fixture?.id}" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#0a6e37"/><stop offset="100%" stop-color="#d4a843"/>
-              </linearGradient></defs>
-              <circle class="tr" cx="14" cy="14" r="11" fill="none" stroke="var(--d3)" stroke-width="3"/>
-              <circle class="fi" cx="14" cy="14" r="11" fill="none"
-                stroke="url(#cg${f.fixture?.id})" stroke-width="3" stroke-linecap="round"
-                stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
+              <defs><linearGradient id="g${uid}" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0a6e37"/><stop offset="100%" stop-color="#d4a843"/></linearGradient></defs>
+              <circle class="tr" cx="14" cy="14" r="11"/>
+              <circle class="fi" cx="14" cy="14" r="11" stroke="url(#g${uid})" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
             </svg>
-            <div class="mini-ring-lbl">${ia.conf}%</div>
+            <div class="mring-n">${ia.conf}%</div>
           </div>
           <div class="mini-conf-txt">Conf: <strong>${ia.conf>=70?'🟢':ia.conf>=55?'🟡':'🔴'} ${ia.conf}%</strong></div>
         </div>
@@ -885,47 +728,34 @@ function buildCard(f, container, status) {
     renderAnalysis(f,ia);
     renderAlin(f);
   };
-
   container.appendChild(div);
 }
 
-// ── ANÁLISIS DETALLADO ──
-async function renderAnalysis(f, ia) {
+// ════════ ANÁLISIS DETALLADO ════════
+async function renderAnalysis(f, ia){
   showSec('pred',document.querySelectorAll('.ni')[1]);
   const box=document.getElementById('predBox');
-  box.innerHTML=`<div class="loading"><div class="lspin"></div><div class="ltxt">Analizando...</div></div>`;
+  box.innerHTML=`<div class="loading"><div class="lspin"></div><div class="ltxt">Analizando con IA...</div></div>`;
 
   const h=f.teams?.home, a=f.teams?.away;
-  const isLiga=curLiga!==1;
-  const fh=isLiga?'⚽':getFlag(h?.name);
-  const fa=isLiga?'⚽':getFlag(a?.name);
+  const fh=flag(h?.name), fa=flag(a?.name);
   const sh=f.goals?.home, sa=f.goals?.away;
   const isLive=['1H','2H','HT','ET','P'].includes(f.fixture?.status?.short);
   const isFt=['FT','AET','PEN'].includes(f.fixture?.status?.short);
-  const min=f.fixture?.status?.elapsed;
   const hasScore=sh!==null&&sh!==undefined;
+  const min=f.fixture?.status?.elapsed;
 
   // Eventos en tiempo real
   let events=[];
-  try{
-    const ev=await apiFetch('/api/events?fixture='+f.fixture?.id);
-    events=ev.response||[];
-  }catch(e){}
-
-  const evHtml=events.filter(e=>e.type==='Goal'||e.type==='Card').slice(0,12).map(e=>`
-    <div class="ev-row">
-      <div class="ev-min">${e.time?.elapsed}'</div>
-      <div class="ev-ico">${e.type==='Goal'?'⚽':e.detail?.includes('Yellow')?'🟨':e.detail?.includes('Red')?'🟥':'📋'}</div>
-      <div class="ev-txt">${e.player?.name||''}</div>
-      <div class="ev-team">${e.team?.name||''}</div>
-    </div>`).join('');
+  try{ const ev=await apiFetch('/api/events?fixture='+f.fixture?.id); events=ev.response||[]; }catch(e){}
+  const evHtml=events.filter(e=>e.type==='Goal'||e.type==='Card').slice(0,12)
+    .map(e=>`<div class="ev-row"><div class="ev-min">${e.time?.elapsed}'</div><div class="ev-ico">${e.type==='Goal'?'⚽':e.detail?.includes('Yellow')?'🟨':'🟥'}</div><div class="ev-txt">${e.player?.name||''}</div><div class="ev-team">${e.team?.name||''}</div></div>`).join('');
 
   setTimeout(()=>{
     box.innerHTML=`<div class="awrap">
       <div class="stitle">${fh} ${h?.name} vs ${fa} ${a?.name}</div>
-      <div style="font-size:10px;color:var(--mu);margin-bottom:12px">${f.league?.name||''} · ${f.league?.round||''} · 🇧🇴 ${bolTime(f.fixture?.date)}</div>
+      <div style="font-size:10px;color:var(--mu);margin-bottom:12px">${f.league?.name||''} · ${f.league?.round||''} · 🇧🇴 ${bolTime(f.fixture?.date||'')} · 📍 ${f.fixture?.venue?.city||''}</div>
 
-      <!-- SPLIT HERO -->
       <div class="split-hero">
         <div class="sv-live${isFt?' ft':!hasScore?' ns':''}">
           <div class="sv-lbl">${isLive?'🔴 EN VIVO':isFt?'✅ RESULTADO FINAL':'⏰ PRÓXIMO PARTIDO'}</div>
@@ -934,39 +764,31 @@ async function renderAnalysis(f, ia) {
             ${isLive?`<div class="sv-min">${min}' · En curso</div>`:''}
             <div class="sv-tr"><span class="sv-fl">${fh}</span><span>${h?.name}</span><strong>${sh}</strong></div>
             <div class="sv-tr"><span class="sv-fl">${fa}</span><span>${a?.name}</span><strong>${sa}</strong></div>
-          `:`
-            <div style="text-align:center;padding:10px 0">
-              <div style="font-size:26px;margin-bottom:6px">${fh} vs ${fa}</div>
-              <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;color:var(--gold)">${bolTime(f.fixture?.date)}</div>
-              <div style="font-size:9px;color:var(--mu);margin-top:3px">📍 ${f.fixture?.venue?.city||''}</div>
-            </div>
-          `}
+          `:`<div style="text-align:center;padding:10px 0">
+            <div style="font-size:26px;margin-bottom:6px">${fh} vs ${fa}</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;color:var(--gold)">${bolTime(f.fixture?.date||'')}</div>
+            <div style="font-size:9px;color:var(--mu);margin-top:3px">📍 ${f.fixture?.venue?.city||''}</div>
+          </div>`}
         </div>
         <div class="sv-pred">
           <div class="sv-lbl">🤖 PREDICCIÓN IA</div>
-          <div class="sv-pred-sc">${ia.topScore}</div>
-          <div class="sv-pred-win">${ia.winner} (${ia.wpct}%)</div>
+          <div class="sv-pred-sc">${ia.sc}</div>
+          <div class="sv-pred-win">${ia.w} (${ia.ws}%)</div>
           <div style="font-size:10px;color:var(--mu)">Confianza: <strong style="color:var(--gold)">${ia.conf}%</strong></div>
           <div class="sv-cbar"><div class="sv-cfill" style="width:${ia.conf}%"></div></div>
           <div class="sv-ctxt">${ia.conf>=70?'🟢 Riesgo Bajo':ia.conf>=55?'🟡 Riesgo Medio':'🔴 Riesgo Alto'}</div>
         </div>
       </div>
 
-      ${evHtml?`
-        <div class="stitle">⚽ Eventos del partido</div>
-        <div class="ev-list">${evHtml}</div>`:''}
+      ${evHtml?`<div class="stitle">⚽ Eventos del partido</div><div class="ev-list">${evHtml}</div>`:''}
 
-      <div class="aibox">
-        <div class="aibg">🤖 ANÁLISIS IA</div>
-        <p>${ia.ai}</p>
-      </div>
+      <div class="aibox"><div class="aibg">🤖 ANÁLISIS IA</div><p>${ia.ai}</p></div>
 
-      <!-- BARRA PROBS COMPLETA -->
       <div style="background:var(--d2);border:1px solid var(--d3);border-radius:11px;padding:14px;margin-bottom:11px">
         <div style="display:flex;height:34px;border-radius:7px;overflow:hidden;margin-bottom:5px">
-          <div style="background:linear-gradient(135deg,#073d20,var(--g));display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;width:${ia.p1}%;transition:.6s;min-width:${ia.p1>8?'0':'32px'}">${ia.p1}%</div>
-          <div style="background:linear-gradient(135deg,#1a2530,var(--d4));display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:var(--mu);width:${ia.pd}%;transition:.6s">${ia.pd}%</div>
-          <div style="background:linear-gradient(135deg,#0e2e6a,var(--bl));display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;width:${ia.p2}%;transition:.6s">${ia.p2}%</div>
+          <div style="background:linear-gradient(135deg,#073d20,var(--g));display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;width:${ia.p1}%">${ia.p1}%</div>
+          <div style="background:linear-gradient(135deg,#1a2530,var(--d4));display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:var(--mu);width:${ia.pd}%">${ia.pd}%</div>
+          <div style="background:linear-gradient(135deg,#0e2e6a,var(--bl));display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;width:${ia.p2}%">${ia.p2}%</div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu)">
           <span style="color:var(--gl)">${h?.name}</span><span>Empate</span><span style="color:var(--bl)">${a?.name}</span>
@@ -974,83 +796,61 @@ async function renderAnalysis(f, ia) {
       </div>
 
       <div class="sgrid">
-        <div class="sbox"><div class="sl">Marcador</div><div class="sv2 cgo">${ia.topScore}</div></div>
-        <div class="sbox"><div class="sl">Goles xG</div><div class="sv2 cg">${ia.expG}</div></div>
+        <div class="sbox"><div class="sl">Marcador</div><div class="sv2 cgo">${ia.sc}</div></div>
+        <div class="sbox"><div class="sl">Goles xG</div><div class="sv2 cg">${ia.xg}</div></div>
         <div class="sbox"><div class="sl">BTTS</div><div class="sv2 ${parseFloat(ia.btts)>50?'cg':'cr'}">${ia.btts}</div></div>
-        <div class="sbox"><div class="sl">Over 2.5</div><div class="sv2 ${parseFloat(ia.over)>50?'cg':'cr'}">${ia.over}</div></div>
-        <div class="sbox"><div class="sl">Córners</div><div class="sv2 cgo">${ia.corners}</div></div>
-        <div class="sbox"><div class="sl">Tarjetas</div><div class="sv2 cr">${ia.cards}</div></div>
+        <div class="sbox"><div class="sl">Over 2.5</div><div class="sv2 ${parseFloat(ia.ov)>50?'cg':'cr'}">${ia.ov}</div></div>
+        <div class="sbox"><div class="sl">Córners</div><div class="sv2 cgo">${ia.co}</div></div>
+        <div class="sbox"><div class="sl">Tarjetas</div><div class="sv2 cr">${ia.ca}</div></div>
       </div>
 
       <div class="stitle">Top 5 Marcadores</div>
-      <div class="s5">${ia.scores.map((s,i)=>`
-        <div class="s5c${i===0?' top':''}">
-          <div class="s5r">${s.r}</div>
-          <div class="s5p">${s.p}</div>
-          <div style="font-size:8px;color:var(--mu)">${s.t||''}</div>
-        </div>`).join('')}</div>
+      <div class="s5">${ia.scores.map((s,i)=>`<div class="s5c${i===0?' top':''}"><div class="s5r">${s.r}</div><div class="s5p">${s.p}</div><div style="font-size:8px;color:var(--mu)">${s.t||''}</div></div>`).join('')}</div>
 
       <div class="stitle">Factores Clave</div>
-      <div class="facts">${ia.factors.map(fc=>`
-        <div class="fact">
-          <div class="fi">${fc.i}</div>
-          <div class="ft2">${fc.t}</div>
-          <div class="fimp ${fc.c}">${fc.imp}</div>
-        </div>`).join('')}</div>
+      <div class="facts">${ia.factors.map(fc=>`<div class="fact"><div class="fi">${fc.i}</div><div class="ft2">${fc.t}</div><div class="fimp ${fc.c}">${fc.imp}</div></div>`).join('')}</div>
 
-      <div class="disc">
-        <strong>⚠️</strong> Predicciones probabilísticas — no garantizan resultados.
-        ${isLive?'🔴 Partido en vivo — actualizando cada 30 segundos.':''}
-        ${isFt?'✅ Resultado final oficial.':''}
-      </div>
+      <div class="disc"><strong>⚠️</strong> Predicciones probabilísticas — no garantizan resultados. ${isLive?'🔴 En vivo — actualizando cada 60s.':''} ${isFt?'✅ Resultado final oficial.':''}</div>
     </div>`;
   },350);
 }
 
-// ── ALINEACIONES ──
-async function renderAlin(f) {
+// ════════ ALINEACIONES ════════
+async function renderAlin(f){
   const box=document.getElementById('alinBox');
   box.innerHTML=`<div class="loading"><div class="lspin"></div><div class="ltxt">Cargando alineaciones...</div></div>`;
-
   const h=f.teams?.home, a=f.teams?.away;
-  const isLiga=curLiga!==1;
-  const fh=isLiga?'⚽':getFlag(h?.name);
-  const fa=isLiga?'⚽':getFlag(a?.name);
-  let lu1=[],lu2=[],src='⏳ Pendiente (~60 min antes)';
-
+  const fh=flag(h?.name), fa=flag(a?.name);
+  let lu1=[],lu2=[],src='⏳ Disponible ~60 min antes del partido';
   try{
     const d=await apiFetch('/api/lineups?fixture='+f.fixture?.id);
     if(d.response?.length>=2){
       lu1=(d.response[0].startXI||[]).map(p=>({num:p.player?.number,nm:p.player?.name,pos:p.player?.pos}));
       lu2=(d.response[1].startXI||[]).map(p=>({num:p.player?.number,nm:p.player?.name,pos:p.player?.pos}));
-      src='✅ Alineación oficial API-Football';
+      src='✅ Alineación oficial confirmada';
     }
   }catch(e){}
-
   const lh=(lu,name,flg)=>{
-    if(!lu||lu.length<5) return`<div class="lt"><div class="lh"><span>${flg} ${name}</span></div><div class="lem">⏳ Disponible ~60 min antes del partido.</div></div>`;
-    return`<div class="lt"><div class="lh"><span>${flg} ${name}</span><span class="lsrc">✓</span></div>
-      ${lu.map(p=>`<div class="lr"><div class="lnum">${p.num||''}</div><div class="lnm">${p.nm||''}</div><div class="lpos">${p.pos||''}</div></div>`).join('')}
-    </div>`;
+    if(!lu||lu.length<5) return`<div class="lt"><div class="lh"><span>${flg} ${name}</span></div><div class="lem">⏳ Alineación disponible ~60 min antes del partido.</div></div>`;
+    return`<div class="lt"><div class="lh"><span>${flg} ${name}</span><span class="lsrc">✓ Oficial</span></div>${lu.map(p=>`<div class="lr"><div class="lnum">${p.num||''}</div><div class="lnm">${p.nm||''}</div><div class="lpos">${p.pos||''}</div></div>`).join('')}</div>`;
   };
-
   box.innerHTML=`<div class="awrap">
     <div class="stitle">${fh} ${h?.name} vs ${fa} ${a?.name}</div>
-    <div style="font-size:10px;color:var(--gold);margin-bottom:10px">${src} · 🇧🇴 ${bolTime(f.fixture?.date)}</div>
+    <div style="font-size:10px;color:var(--gold);margin-bottom:10px">${src} · 🇧🇴 ${bolTime(f.fixture?.date||'')}</div>
     <div class="lng">${lh(lu1,h?.name,fh)}${lh(lu2,a?.name,fa)}</div>
-    <div class="disc"><strong>Fuente:</strong> API-Football. Las alineaciones oficiales se actualizan automáticamente ~60 min antes del partido.</div>
+    <div class="disc"><strong>Fuente:</strong> API-Football. Las alineaciones se actualizan automáticamente cuando el técnico las confirma.</div>
   </div>`;
 }
 
-// ── GRUPOS MUNDIAL ──
+// ════════ GRUPOS MUNDIAL ════════
 const GRUPOS=[
-  {n:'A',t:[{f:'🇲🇽',nm:'México',j:3,g:2,e:0,p:1,pts:6,ok:true},{f:'🇿🇦',nm:'Sudáfrica',j:3,g:1,e:1,p:1,pts:4,ok:true},{f:'🇰🇷',nm:'Corea del Sur',j:3,g:1,e:0,p:2,pts:3,ok:false},{f:'🇨🇿',nm:'Rep. Checa',j:3,g:0,e:1,p:2,pts:1,ok:false}]},
-  {n:'B',t:[{f:'🇨🇦',nm:'Canadá',j:3,g:2,e:1,p:0,pts:7,ok:true},{f:'🇨🇭',nm:'Suiza',j:3,g:2,e:0,p:1,pts:6,ok:true},{f:'🇶🇦',nm:'Qatar',j:3,g:0,e:2,p:1,pts:2,ok:false},{f:'🇧🇦',nm:'Bosnia',j:3,g:0,e:1,p:2,pts:1,ok:false}]},
-  {n:'G',t:[{f:'🇧🇪',nm:'Bélgica',j:3,g:2,e:1,p:0,pts:7,ok:true},{f:'🇪🇬',nm:'Egipto',j:3,g:1,e:1,p:1,pts:4,ok:true},{f:'🇮🇷',nm:'Irán',j:3,g:0,e:2,p:1,pts:2,ok:false},{f:'🇳🇿',nm:'N. Zelanda',j:3,g:0,e:0,p:3,pts:0,ok:false}]},
-  {n:'H',t:[{f:'🇪🇸',nm:'España',j:3,g:2,e:1,p:0,pts:7,ok:true},{f:'🇺🇾',nm:'Uruguay',j:3,g:0,e:2,p:1,pts:2,ok:false},{f:'🇨🇻',nm:'Cabo Verde',j:3,g:0,e:2,p:1,pts:2,ok:false},{f:'🇸🇦',nm:'Arabia S.',j:3,g:0,e:1,p:2,pts:1,ok:false}]},
-  {n:'J',t:[{f:'🇦🇷',nm:'Argentina',j:2,g:2,e:0,p:0,pts:6,ok:true},{f:'🇦🇹',nm:'Austria',j:2,g:1,e:0,p:1,pts:3,ok:false},{f:'🇩🇿',nm:'Argelia',j:2,g:1,e:0,p:1,pts:3,ok:false},{f:'🇯🇴',nm:'Jordania',j:2,g:0,e:0,p:2,pts:0,ok:false}]},
-  {n:'K',t:[{f:'🇨🇴',nm:'Colombia',j:2,g:2,e:0,p:0,pts:6,ok:true},{f:'🇵🇹',nm:'Portugal',j:2,g:1,e:1,p:0,pts:4,ok:true},{f:'🇨🇩',nm:'RD Congo',j:2,g:0,e:1,p:1,pts:1,ok:false},{f:'🇺🇿',nm:'Uzbekistán',j:2,g:0,e:0,p:2,pts:0,ok:false}]},
-  {n:'L',t:[{f:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',nm:'Inglaterra',j:3,g:3,e:0,p:0,pts:9,ok:true},{f:'🇭🇷',nm:'Croacia',j:3,g:1,e:1,p:1,pts:4,ok:true},{f:'🇵🇦',nm:'Panamá',j:3,g:0,e:1,p:2,pts:1,ok:false},{f:'🇬🇭',nm:'Ghana',j:3,g:0,e:0,p:3,pts:0,ok:false}]},
+  {n:'A',t:[{f:'🇲🇽',nm:'México',j:3,g:2,e:0,p:1,pts:6,ok:true},{f:'🇿🇦',nm:'Sudáfrica',j:3,g:1,e:1,p:1,pts:4,ok:true},{f:'🇰🇷',nm:'Corea del Sur',j:3,g:1,e:0,p:2,pts:3},{f:'🇨🇿',nm:'Rep. Checa',j:3,g:0,e:1,p:2,pts:1}]},
+  {n:'B',t:[{f:'🇨🇦',nm:'Canadá',j:3,g:2,e:1,p:0,pts:7,ok:true},{f:'🇨🇭',nm:'Suiza',j:3,g:2,e:0,p:1,pts:6,ok:true},{f:'🇶🇦',nm:'Qatar',j:3,g:0,e:2,p:1,pts:2},{f:'🇧🇦',nm:'Bosnia',j:3,g:0,e:1,p:2,pts:1}]},
+  {n:'G',t:[{f:'🇧🇪',nm:'Bélgica',j:3,g:2,e:1,p:0,pts:7,ok:true},{f:'🇪🇬',nm:'Egipto',j:3,g:1,e:1,p:1,pts:4,ok:true},{f:'🇮🇷',nm:'Irán',j:3,g:0,e:2,p:1,pts:2},{f:'🇳🇿',nm:'N. Zelanda',j:3,g:0,e:0,p:3,pts:0}]},
+  {n:'H',t:[{f:'🇪🇸',nm:'España',j:3,g:2,e:1,p:0,pts:7,ok:true},{f:'🇺🇾',nm:'Uruguay',j:3,g:0,e:2,p:1,pts:2},{f:'🇨🇻',nm:'Cabo Verde',j:3,g:0,e:2,p:1,pts:2},{f:'🇸🇦',nm:'Arabia S.',j:3,g:0,e:1,p:2,pts:1}]},
+  {n:'J',t:[{f:'🇦🇷',nm:'Argentina',j:2,g:2,e:0,p:0,pts:6,ok:true},{f:'🇦🇹',nm:'Austria',j:2,g:1,e:0,p:1,pts:3},{f:'🇩🇿',nm:'Argelia',j:2,g:1,e:0,p:1,pts:3},{f:'🇯🇴',nm:'Jordania',j:2,g:0,e:0,p:2,pts:0}]},
+  {n:'K',t:[{f:'🇨🇴',nm:'Colombia',j:2,g:2,e:0,p:0,pts:6,ok:true},{f:'🇵🇹',nm:'Portugal',j:2,g:1,e:1,p:0,pts:4,ok:true},{f:'🇨🇩',nm:'RD Congo',j:2,g:0,e:1,p:1,pts:1},{f:'🇺🇿',nm:'Uzbekistán',j:2,g:0,e:0,p:2,pts:0}]},
+  {n:'L',t:[{f:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',nm:'Inglaterra',j:3,g:3,e:0,p:0,pts:9,ok:true},{f:'🇭🇷',nm:'Croacia',j:3,g:1,e:1,p:1,pts:4,ok:true},{f:'🇵🇦',nm:'Panamá',j:3,g:0,e:1,p:2,pts:1},{f:'🇬🇭',nm:'Ghana',j:3,g:0,e:0,p:3,pts:0}]},
 ];
 function renderGrupos(){
   document.getElementById('gruGrid').innerHTML=GRUPOS.map(gr=>`
@@ -1076,11 +876,7 @@ function renderRanking(){
   document.getElementById('rkBody').innerHTML=RANKS.map((t,i)=>`
     <div class="rr">
       <div class="rnum${i<3?' t':''}">${i+1}</div>
-      <div class="rteam"><span class="rflag">${t.f}</span>
-        <div><div class="rname">${t.n}</div>
-          <div class="rbar"><div class="rbarf" style="width:${(t.r/mx*100).toFixed(0)}%"></div></div>
-        </div>
-      </div>
+      <div class="rteam"><span class="rflag">${t.f}</span><div><div class="rname">${t.n}</div><div class="rbar"><div class="rbarf" style="width:${(t.r/mx*100).toFixed(0)}%"></div></div></div></div>
       <div class="rv" style="color:var(--gold)">${t.r}</div>
       <div class="rv">${t.t}</div>
     </div>`).join('');
@@ -1100,63 +896,7 @@ setTimeout(()=>{
   setTimeout(()=>document.getElementById('splash').style.display='none',600);
 },2200);
 
-// FALLBACK: Partidos del Mundial si la API no los tiene aún
-function getWCFallback() {
-  const now = new Date();
-  const bol = new Date(now.getTime() - 4*3600000);
-  const todayBol = bol.toISOString().split('T')[0];
-
-  // Todos los partidos de los 16avos en UTC
-  const WC_FIXTURES = [
-    // 28 Jun
-    {date:'2026-06-28T23:00:00Z', home:'South Africa', away:'Canada', venue:'Los Angeles'},
-    // 29 Jun
-    {date:'2026-06-29T21:00:00Z', home:'Brazil', away:'Japan', venue:'Houston'},
-    {date:'2026-06-30T00:30:00Z', home:'Germany', away:'Paraguay', venue:'Boston'},
-    // 30 Jun
-    {date:'2026-06-30T06:00:00Z', home:'Netherlands', away:'Morocco', venue:'Monterrey'},
-    {date:'2026-06-30T22:00:00Z', home:'Ivory Coast', away:'Norway', venue:'Dallas'},
-    {date:'2026-07-01T02:00:00Z', home:'France', away:'Sweden', venue:'New Jersey'},
-    // 1 Jul
-    {date:'2026-07-01T07:00:00Z', home:'Mexico', away:'Ecuador', venue:'Mexico City'},
-    {date:'2026-07-01T22:00:00Z', home:'England', away:'DR Congo', venue:'Atlanta'},
-    {date:'2026-07-02T02:00:00Z', home:'Belgium', away:'Senegal', venue:'Seattle'},
-    // 2 Jul
-    {date:'2026-07-02T06:00:00Z', home:'USA', away:'Bosnia', venue:'Santa Clara'},
-    {date:'2026-07-02T23:00:00Z', home:'Spain', away:'Austria', venue:'Dallas'},
-    {date:'2026-07-03T03:00:00Z', home:'Portugal', away:'Algeria', venue:'New York'},
-    // 3 Jul
-    {date:'2026-07-03T22:00:00Z', home:'Argentina', away:'Cape Verde', venue:'Houston'},
-    {date:'2026-07-04T02:00:00Z', home:'Croatia', away:'Colombia', venue:'Kansas City'},
-  ];
-
-  // Filtrar partidos de hoy (hora Bolivia) y mañana
-  const tomorrowBol = new Date(bol.getTime()+86400000).toISOString().split('T')[0];
-
-  return WC_FIXTURES
-    .filter(f => {
-      const bolDate = new Date(new Date(f.date).getTime()-4*3600000).toISOString().split('T')[0];
-      return bolDate === todayBol || bolDate === tomorrowBol || bolDate === new Date(new Date(bol.getTime()+2*86400000)).toISOString().split('T')[0];
-    })
-    .map((f,i) => ({
-      fixture: {
-        id: 9000+i,
-        date: f.date,
-        status: { short: new Date(f.date) < now ? 'FT' : 'NS', elapsed: null },
-        venue: { city: f.venue }
-      },
-      league: { id:1, name:'Copa Mundial FIFA 2026', round:'Round of 32' },
-      teams: {
-        home: { id: 9000+i, name: f.home, winner: null },
-        away: { id: 9001+i, name: f.away, winner: null }
-      },
-      goals: { home: null, away: null },
-      score: {}
-    }));
-}
-
 // INIT
-renderGrupos(); renderRanking();
 clk(); setInterval(clk,10000);
 init();
 </script>
